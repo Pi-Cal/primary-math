@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 export const Chapter1 = ({ show }) => {
   const [open, set] = useState(false);
 
+  console.log(FakeData);
+
   const navigate = useNavigate();
 
   const springApi = useSpringRef();

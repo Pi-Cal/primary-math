@@ -4,7 +4,8 @@ export const FakeData = [
     description: "#a8edea → #fed6e3",
     css: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
     height: 600,
-    nav: '/chapter-2/nhanbiet'
+    nav: '/chapter-2/nhanbiet',
+    component: <h1>Hihi</h1>
   },
   {
     name: "Trồng cây 2 đầu",
