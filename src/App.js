@@ -3,7 +3,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Home } from './pages/home.page';
 import { Chapter1 } from './pages/chapter1.time.page';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ChapterPart from './pages/chapter-2.part';
+import ChapterPart from './pages/chapter-2.page/chapter-2.part';
 import { Chapter1Recognitions } from './pages/chapter-1.page/nhanbiet.page/nhanbiet.page';
 
 function App() {
