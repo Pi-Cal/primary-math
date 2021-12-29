@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
-import { Button, Container, Image } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import  ChapterTest from './chapter-test';
+import React from 'react';
+import { Image } from 'react-bootstrap';
 import { Chapter1 } from './chapter1.time.page';
 import { Chapter2 } from './chapter2.tree-interval';
 import './home.css';
@@ -15,8 +13,6 @@ export const Home = () => {
             <div className="chapters">
                 <Chapter1/>
                 <Chapter2/>
-                <ChapterTest abc='123' xyz='456' time='9:30'/>
-                <ChapterTest abc='321' xyz='789' time='9:50'/>
             </div>
         </div>
     )
