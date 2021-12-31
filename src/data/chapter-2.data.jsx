@@ -9,6 +9,12 @@ export const FakeData = [
       {
         id: 1,
         type: 'multiple-choice',
+        scene: {
+          object: 'tree',
+          totalObj: 6,
+          space: '4m',
+          totalSpace: '?m'
+        },
         problem: 'Con đường phía trước trường em có 6 cái cây. Mỗi cái cây cách nhau 4m. Hỏi cây thứ sáu cách cây thứ nhất bao nhiêu mét?',
         choices: ['15m', '20m', '25m', '30m'],
         answer: '20m'
@@ -16,6 +22,12 @@ export const FakeData = [
       {
         id: 2,
         type: 'multiple-choice',
+        scene: {
+          object: 'tree',
+          totalObj: 8,
+          space: '?m',
+          totalSpace: '21m'
+        },
         problem: 'Trên một con đường, khoảng cách giữa cây đầu tiên với cây thứ tám là 21m. Hỏi khoảng cách giữa các cây là bao nhiêu nếu các cây được trồng cách đều nhau?',
         choices: ['2m', '3m', '4m', '5m'],
         answer: '3m'
