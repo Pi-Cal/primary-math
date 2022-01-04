@@ -1,3 +1,32 @@
 .vh-80 {
     height: 80vh;
 }
+
+.h-90 {
+    height: 90%;
+}
+.h-10 {
+    height: 10%;
+}
+.clock-bg-img {
+    width: 100%;
+    object-fit: cover;
+}
+.start-container {
+    background-color: rgb(254 203 112);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url('/public/background/clock-background.png');
+    background-size: contain;
+    background-repeat: no-repeat; */
+}
+.btn-container {
+    position: absolute;
+}
+.practice-slogan {
+    font-size: 4rem;
+    font-weight: 600;
+    font-family: "Jingleberry", cursive;
+}
