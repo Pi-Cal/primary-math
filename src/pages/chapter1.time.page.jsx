@@ -35,13 +35,10 @@ export const Chapter1 = ({ show }) => {
     },
   });
 
-  const partNameStyle = useSpring({
-    from: {
-      opacity: open ? 1 : 0, 
-    },
-    to: { 
-      opacity: !open ? 1 : 0, 
-    },
+  const partNameStyle = useTransition(open, {
+    from: { opacity: 0, scale: 2 },
+    enter: { opacity: 1, scale: 1, delay: 500 },
+    leave: { opacity: 0, scale: 2 },
   })
 
   const transApi = useSpringRef();
@@ -64,7 +61,6 @@ export const Chapter1 = ({ show }) => {
       style={{ ...rest, width: size, height: size }}
       className="chapter-container"
       onClick={() => set((open) => !open)}
-      onBlur={()=> console.log('Blureeeed')}
     >
       {transition((style, item) => (
         <animated.div
@@ -76,7 +72,7 @@ export const Chapter1 = ({ show }) => {
         </animated.div>
       ))} 
       {
-        !open ? <animated.div className="chapter-name" style={{...partNameStyle}}>Cho tôi biết mấy giờ rồi nhé</animated.div> : <></>
+        partNameStyle((style, open)=> !open && <animated.div className="chapter-name" style={{...style}}>Cho tôi biết mấy giờ rồi nhé</animated.div>) 
       }
     </animated.div>
   );
