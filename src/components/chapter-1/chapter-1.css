@@ -30,7 +30,7 @@
 }
 
 .answer-list:hover {
-    background-color: rgb(18, 168, 73);
+    background-color: coral;
     cursor: pointer;
 }
 .answer-list:active {
@@ -52,26 +52,6 @@
     font-weight: 600;
     font-size: 18px;
 }
-.animation-container {
-    top: 20%;
+.fig-group {
+    max-width: 40vw;
 }
-.success-text {
-    text-align: center;
-    font-weight: 500;
-    font-size: 28px;
-    text-shadow: 0 0 6px rgb(54, 84, 219);
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-}
-.left-animation, .right-animation {
-    position: absolute;
-    width: 60%;
-    height: 150px;
-    top: -100%;
-}
-.left-animation {
-    left: 0;
-}
-.right-animation {
-    transform: scaleX(-1);
-}
-    
