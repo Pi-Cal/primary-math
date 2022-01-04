@@ -6,7 +6,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import "./chapter-1.css";
 
-export const QuestionModel = ({editable, time, setTime}) => {
+export const QuestionModel = ({editable, time, setTime, scale, canvasName, clockLabel=''}) => {
   const [figSecond, setFigSecond] = useState(null);
   const [figMinute, setFigMinute] = useState(null);
   const [figHour, setFigHour] = useState(null);
@@ -17,14 +17,14 @@ export const QuestionModel = ({editable, time, setTime}) => {
 
   useEffect(() => {
     let scene = new THREE.Scene();
-    let clockCanvas = document.getElementById("clock-canvas");
+    let clockCanvas = document.getElementById(canvasName);
 
     let renderer = new THREE.WebGLRenderer({
       canvas: clockCanvas,
       alpha: true,
       antialias: true,
     });
-    renderer.setSize(window.innerWidth * 0.6, window.innerHeight * 0.6);
+    renderer.setSize(window.innerWidth * 0.6 * scale, window.innerHeight * 0.6 * scale);
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.gammaOutput = true;
@@ -83,7 +83,12 @@ export const QuestionModel = ({editable, time, setTime}) => {
   }, []);
 
   useEffect(() => {
-    setTime({hour, minute, second})
+    let _hour = parseInt(hour);
+    let _minute = parseInt(minute);
+    let _second = parseInt(second);
+    if (_second == 60) {_second = 0; _minute+=1}
+    if (_minute == 60) {_minute = 0; _hour += 1}
+    setTime({hour: _hour,minute: _minute,second: _second})
     console.log(time);
   }, [hour, minute, second]);
 
@@ -103,16 +108,19 @@ export const QuestionModel = ({editable, time, setTime}) => {
 
   return (
     <Container className="h-100 bg-success">
+      <Row className="text-white clock-name fs-5 fw-bold text-center d-flex justify-content-center mb-2">
+        {clockLabel}
+      </Row>
       <Row className="d-flex justify-content-center align-items-center overflow-hidden mb-3">
         {
           //TODO Them mo hinh 3D tuong ung question
-          <canvas id="clock-canvas"></canvas>
+          <canvas id={canvasName}></canvas>
         }
       </Row>
       {
       editable && 
-      <Row>
-        <Col md="4">
+      <Row className="text-white mb-3 m-auto" md={scale === 1 ? '3' : '1'}>
+        <Col>
           <label htmlFor="hour-range" className="form-label">
             Kim giờ
           </label>
@@ -126,7 +134,7 @@ export const QuestionModel = ({editable, time, setTime}) => {
             defaultValue={0}
           ></input>
         </Col>
-        <Col md="4">
+        <Col>
           <label htmlFor="minute-range" className="form-label">
             Kim phút
           </label>
@@ -140,7 +148,7 @@ export const QuestionModel = ({editable, time, setTime}) => {
             defaultValue={0}
           ></input>
         </Col>
-        <Col md="4">
+        <Col>
           <label htmlFor="second-range" className="form-label">
             Kim giây
           </label>
