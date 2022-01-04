@@ -3,7 +3,7 @@ import { Button, Container, Row } from 'react-bootstrap';
 import './chapter-1.css'
 import { SuccessAnimation, FailAnimation } from '../animation';
 
-export const Question = ({question, time}) => {
+export const Question = ({question, startTime, endTime}) => {
 
     const [userAnswer, setUserAnswer] = useState('');
     const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
@@ -18,11 +18,15 @@ export const Question = ({question, time}) => {
     }
 
     const handleSubmit = async ()=>{
-        if (question.type == 'rotate') {
-            const temp = `${time.hour > 12 ? (time.hour-12):time.hour}:${time.minute}`;
+        if (question.type == 'rotate-start') {
+            const temp = `${startTime.hour > 12 ? (startTime.hour-12):startTime.hour}:${startTime.minute}`;
             if(checkAns(temp,question.correctAnswer)) setShowSuccessAnimation(true);
             else setFailAnimation(true);
-        } else {
+        } else if (question.type == 'rotate-end') {
+            const temp = `${endTime.hour > 12 ? (endTime.hour-12):endTime.hour}:${endTime.minute}`;
+            if(checkAns(temp,question.correctAnswer)) setShowSuccessAnimation(true);
+            else setFailAnimation(true);
+        }else {
             if(checkAns(userAnswer, question.correctAnswer)) setShowSuccessAnimation(true);
             else setFailAnimation(true);
         }

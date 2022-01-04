@@ -1,5 +1,3 @@
-import ChapterTest from "../pages/chapter-test";
-
 export const FakeData = [
   {
     name: "Nhận biết",
@@ -64,5 +62,28 @@ export const FakeData = [
     css: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
     height: 600,
     nav: '/chapter-1/thembotgio',
+    question: [
+      {
+        type: 'single-choice',
+        request: 'Đi học lúc 6h đến trường lúc 7h30. Hỏi đi học trong bao lâu',
+        answer: ['1:30','1:34','2:40','2:45'],
+        correctAnswer: '1:30'
+      },
+      {
+        type: 'input',
+        request: 'Đi học lúc 6h đến trường lúc 7h30. Hỏi đi học trong bao lâu',
+        correctAnswer: '1:30'
+      },
+      {
+        type: 'rotate-start',
+        request: 'Nam đến trường lúc 7h30. Hỏi Nam bắt đầu đi học lúc mấy giờ? Biết Nam đi học hết 1 giờ 30 phút',
+        correctAnswer: '6:00'
+      },
+      {
+        type: 'rotate-end',
+        request: 'Nam bắt đầu đi học lúc 6h. Nam đi học hết 1 giờ 30 phút. Hỏi Nam đến trường lúc mấy giờ',
+        correctAnswer: '7:30'
+      },
+    ]
   }
 ];
