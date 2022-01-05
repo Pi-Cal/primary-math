@@ -1,12 +1,12 @@
 .vh-80 {
-    height: 80vh;
+    min-height: 80vh;
 }
 
 .h-90 {
-    height: 90%;
+    min-height: 90%;
 }
 .h-10 {
-    height: 10%;
+    min-height: 10%;
 }
 .clock-bg-img {
     width: 100%;

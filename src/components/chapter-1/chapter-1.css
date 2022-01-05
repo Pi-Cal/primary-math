@@ -14,10 +14,10 @@
 }
 
 .h-30 {
-    height: 30%;
+    min-height: 30%;
 }
 .h-60 {
-    height: 60%;
+    min-height: 60%;
 }
 
 .answer-list {
