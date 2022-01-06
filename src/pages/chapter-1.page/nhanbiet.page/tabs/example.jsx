@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import './example.css'
 import { TransformControls } from "three/examples/jsm/controls/TransformControls.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export const Example = () => {
     let [figSecond, setFigSecond] = useState(null);
@@ -17,16 +18,27 @@ export const Example = () => {
     let rotation = "null";
 
     useEffect(() => {
-        if (figHour)
+        if (figHour){
+            figHour.rotation.x = 0
+            figHour.rotation.z = 0
             figHour.rotation.y =
                 ((hour * Math.PI) / 6 +
                     (minute * Math.PI) / (6 * 60) +
                     (second * Math.PI) / (360 * 60)) *
                 -1;
-        if (figMinute)
+        }
+
+        if (figMinute){
+            figMinute.rotation.x = 0
+            figMinute.rotation.z = 0
             figMinute.rotation.y =
                 ((minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60)) * -1;
-        if (figSecond) figSecond.rotation.y = ((second * Math.PI) / 30) * -1;
+        }
+        if (figSecond) {
+            figSecond.rotation.x = 0
+            figSecond.rotation.z = 0
+            figSecond.rotation.y = ((second * Math.PI) / 30) * -1;
+        }
     }, [hour, minute, second]);
 
     function formatTime(value){
@@ -67,7 +79,7 @@ export const Example = () => {
             document.getElementById("minute-2").setAttribute("class","num-"+minute.substr(1,1))
             document.getElementById("second-1").setAttribute("class","num-"+second.substr(0,1))
             document.getElementById("second-2").setAttribute("class","num-"+second.substr(1,1))
-
+            document.getElementById("check").innerText = 'x' + figSecond.rotation.x + '\ny' + figSecond.rotation.y + '\nz' + figSecond.rotation.z
             setTimeout(changeTime, 1000)
         }
         if (timeNow === 1) changeTime();
@@ -127,8 +139,10 @@ export const Example = () => {
                 }
             });
             scene.add(glb.scene);
-            glb.scene.rotation.x = -29.8
+            glb.scene.rotation.x = Math.PI / 2
         });
+
+        // new OrbitControls(camera, renderer.domElement)
 
         window.addEventListener('resize', function() {
             let width = window.innerWidth
@@ -139,6 +153,12 @@ export const Example = () => {
         }, );
 
         let oldRotation = "null";
+
+        controls.addEventListener('objectChange', () => {
+            // clockModel.getChildByName("Seconds").rotation.x = 0
+            // clockModel.getChildByName("Seconds").rotation.z = 0
+            document.getElementById("check").innerText = 'x' + clockModel.getChildByName("Seconds").rotation.x + '\ny' + clockModel.getChildByName("Seconds").rotation.y + '\nz' + clockModel.getChildByName("Seconds").rotation.z
+        })
 
         const animate = () => {
             requestAnimationFrame(animate)
