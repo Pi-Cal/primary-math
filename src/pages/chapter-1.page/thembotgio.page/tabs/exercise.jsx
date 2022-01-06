@@ -3,23 +3,36 @@ import { Col, Container, Row, Button, ProgressBar, Image } from 'react-bootstrap
 import './part-2.tabs.css'
 import {FakeData} from '../../../../data/chapter-1.data'
 import { useNavigate } from 'react-router-dom';
-import {animated, useTransition} from '@react-spring/web'
+import {animated, useTransition, useSpring} from '@react-spring/web'
 import { QuestionModel } from '../../../../components/chapter-1/part-1.question.model';
 import { Question } from '../../../../components/chapter-1/part-2.question';
 
 export const Exercise = () => {
 
+    const [loading, setLoading] = useState(false);
     const [currentQuiz, setCurrentQuiz] = useState(0);
-    const [questions] = useState(FakeData[1].question);
+    const [questions] = useState(()=>{
+        const array = [...FakeData[1].question]
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return [...array]
+    });
     const [start, setStart] = useState(false);
     const [startTime, setStartTime] = useState({hour:0, minute:0, second: 0})
     const [endTime, setEndTime] = useState({hour:0, minute:0, second: 0})
 
     const navigate = useNavigate();
 
-    const handleNext = () => {
-        if (currentQuiz < questions.length - 1) setCurrentQuiz(currentQuiz + 1)
-        else navigate('/')
+    const handleNext = async () => {
+        if(loading) return;
+        setLoading(true);
+        await (() => {
+            if (currentQuiz < questions.length - 1) setCurrentQuiz(currentQuiz + 1)
+            else navigate('/')
+        })()
+        setLoading(false);
     }
 
     const handlePrev = () => {
@@ -33,6 +46,28 @@ export const Exercise = () => {
         leave : {opacity: 0}
     })
 
+    const convertString2Time = (str) => {
+        const timeArr = str.split(':');
+        return({
+            hour: timeArr[0],
+            minute: timeArr[1],
+            second: 0
+        })
+    }
+
+    useEffect(()=>{
+        if(questions[currentQuiz].startTime) 
+            setStartTime({...convertString2Time(questions[currentQuiz].startTime)})
+        else setStartTime({hour: 0, minute: 0, second: 0});
+        if(questions[currentQuiz].endTime) 
+            setEndTime({...convertString2Time(questions[currentQuiz].endTime)})
+        else setEndTime({hour: 0, minute: 0, second: 0});
+    },[currentQuiz])
+
+    const loadingEffect = useSpring({
+        from: {opacity:0},
+        to: {opacity: 1}
+    })
 
     return(
         <Container className='position-relative'>
@@ -42,7 +77,8 @@ export const Exercise = () => {
                 (<animated.div style={style}>
                 <Row className='vh-80'>
                     <Col md='8' className='bg-success d-flex justify-content-center align-items-center'>
-                        <Row>
+                        {
+                        !loading && <Row style={{...loadingEffect}}>
                             <Col md='6'>
                                 <QuestionModel 
                                     setTime={setStartTime} 
@@ -63,7 +99,7 @@ export const Exercise = () => {
                                     clockLabel='Giờ kết thúc'
                                 />
                             </Col>
-                        </Row>
+                        </Row>}
                     </Col>
                     <Col md='4' className='bg-light'>
                         <Row className='h-90 position-relative'>
