@@ -1,7 +1,11 @@
 import { Billboard, Text } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
 import React, { useEffect, useState } from 'react';
-import Tree from './tree.model';
+import Tree from './model/tree.model';
+import House from './model/house.model';
+import Match from './model/match.model';
+import Bulb from './model/bulb.model';
+import Rock from './model/rock.model';
+import Human from './model/human.model';
 
 const generatePos = (totalObj) => {
     let res = [];
@@ -17,8 +21,9 @@ const generatePos = (totalObj) => {
     return res;
 }
 
-const generateSpacePos = (totalObj) => {
+const generateSpacePos = (totalObj, firstObj, lastObj) => {
     let res = [];
+    
     if (totalObj % 2 === 0) {
         for (let i = -totalObj / 2 + 1; i <= totalObj / 2 - 1; i++) {
             res.push(i * 2);
@@ -31,33 +36,51 @@ const generateSpacePos = (totalObj) => {
     return res;
 }
 
-export default function AnimateBox({totalObj, totalSpace, space, type}) {
+export default function AnimateBox({totalObj, totalSpace, space, object, firstObj=null, lastObj=null}) {
     const [xPos, setX] = useState(() => generatePos(totalObj));
-    const [yPos, setY] = useState(0);
-    const [xSpace, setXSpace] = useState(() => generateSpacePos(totalObj));
-    const [ySpace, setYSpace] = useState(-0.8);
+    const [yPos] = useState(0);
+    const [xSpace, setXSpace] = useState(() => generateSpacePos(totalObj, firstObj, lastObj));
+    const [ySpace] = useState(-0.8);
 
     useEffect(() => {
         setX(() => generatePos(totalObj));
         setXSpace(() => generateSpacePos(totalObj));
     }, [totalObj])
 
-    /* useFrame(() => {
-        if (yPos < 1) setPos(yPos + 0.02);
-        if (ySpace > -2) setSpace(ySpace - 0.03);
-    }) */
     return (
         <>
             {
-                xPos.map((x, index) => (
-                    <Tree key={index} position={[x, yPos, 0]} />
-                ))
+                xPos.map((x, index) => {
+                    let switchObj = object;
+                    if (firstObj !== null && index === 0) {
+                        switchObj = firstObj;
+                    }
+                    if (lastObj !== null && index === totalObj - 1) {
+                        switchObj = lastObj;
+                    }
+                    switch(switchObj) {
+                        case "tree":
+                            return <Tree key={index} position={[x, yPos, 0]} />
+                        case "house":
+                            return <House key={index} position={[x, yPos - 0.4, 0]} />
+                        case "bulb":
+                            return <Bulb key={index} position={[x, yPos - 0.4, 0]} />
+                        case "match":
+                            return <Match key={index} position={[x, yPos - 0.2, 0]} />
+                        case "rock":
+                            return <Rock key={index} position={[x, yPos - 0.2, 0]} />
+                        case "human":
+                            return <Human key={index} position={[x, yPos - 0.1, 0]} />
+                        default:
+                            return null;
+                    }
+                })
             }
             {
                 xSpace.map((x, index) => (
                     <group key={index}>
                         <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[x, ySpace + 0.3, 0]}>
-                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1}>
+                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
                                 {space}
                             </Text>
                         </Billboard>
@@ -69,7 +92,7 @@ export default function AnimateBox({totalObj, totalSpace, space, type}) {
             }
             <group>
                 <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[0, ySpace - 0.7, 0]}>
-                    <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1}>
+                    <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
                         {totalSpace}
                     </Text>
                 </Billboard>

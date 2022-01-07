@@ -23,9 +23,9 @@ export const FakeData = [
         id: 2,
         type: 'input',
         scene: {
-          object: 'tree',
+          object: 'match',
           totalObj: 5,
-          space: '1 khoảng cách',
+          space: '1 k/c',
           totalSpace: '? khoảng cách'
         },
         problem: '5 que diêm được xếp cách đều nhau. Hỏi có bao nhiêu khoảng cách được xếp giữa các que diêm đó?',
@@ -40,7 +40,7 @@ export const FakeData = [
           space: '?m',
           totalSpace: '21m'
         },
-        problem: 'Trên một con đường, khoảng cách giữa ngôi nhà đầu tiên với ngôi nhà thứ tám là 21m. Hỏi khoảng cách giữa các cây là bao nhiêu nếu các cây được trồng cách đều nhau?',
+        problem: 'Trên một con đường, khoảng cách giữa ngôi nhà đầu tiên với ngôi nhà thứ tám là 21m. Hỏi khoảng cách giữa các ngôi nhà là bao nhiêu nếu các ngôi nhà được xây cách đều nhau?',
         choices: ['2m', '3m', '4m', '5m'],
         answer: '3m'
       },
@@ -60,7 +60,7 @@ export const FakeData = [
         id: 5,
         type: 'multiple-choice',
         scene: {
-          object: 'light',
+          object: 'bulb',
           totalObj: 15,
           space: '1m',
           totalSpace: '14m'
@@ -96,11 +96,13 @@ export const FakeData = [
         type: 'multiple-choice',
         scene: {
           object: 'tree',
-          totalObj: 8,
+          firstObj: null,
+          lastObj: 'house',
+          totalObj: 9,
           space: '4m',
           totalSpace: '?m'
         },
-        problem: 'Dọc theo một con đường có 8 cái cây, cuối đường là một cột điện. Hỏi cây đầu tiên cách cột điện bao nhiêu mét, biết khoảng cách giữa cột điện và cây bằng khoảng cách giữa các cây và bằng 4m.',
+        problem: 'Dọc theo một con đường có 8 cái cây, cuối đường là một ngôi nhà. Hỏi cây đầu tiên cách ngôi nhà bao nhiêu mét, biết khoảng cách giữa ngôi nhà và cây bằng khoảng cách giữa các cây và bằng 4m.',
         choices: ['28m', '30m', '32m', '36m'],
         answer: '32m'
       },
@@ -109,11 +111,13 @@ export const FakeData = [
         type: 'multiple-choice',
         scene: {
           object: 'house',
-          totalObj: 9,
+          firstObj: 'tree',
+          lastObj: null,
+          totalObj: 10,
           space: '8m',
           totalSpace: '?m'
         },
-        problem: 'Dọc theo một con đường có 9 ngôi nhà cách đều nhau 8m, đầu đường là một ngã rẽ. Hỏi con đường này dài bao nhiêu mét (tính từ ngã rẽ đến nhà cuối cùng) ?',
+        problem: 'Dọc theo một con đường có 9 ngôi nhà cách đều nhau 8m, đầu đường là một cái cây. Hỏi con đường này dài bao nhiêu mét (tính từ cây đến nhà cuối cùng) ?',
         choices: ['64m', '70m', '72m', '74m'],
         answer: '72m'
       },
@@ -122,7 +126,9 @@ export const FakeData = [
         type: 'input',
         scene: {
           object: 'house',
-          totalObj: 4,
+          firstObj: 'human',
+          lastObj: null,
+          totalObj: 5,
           space: '?m',
           totalSpace: '40m'
         },
@@ -133,8 +139,10 @@ export const FakeData = [
         id: 4,
         type: 'multiple-choice',
         scene: {
-          object: 'diem',
-          totalObj: 10,
+          object: 'match',
+          firstObj: null,
+          lastObj: 'blank',
+          totalObj: 11,
           space: '3cm',
           totalSpace: '30cm'
         },
@@ -147,13 +155,15 @@ export const FakeData = [
         type: 'input',
         scene: {
           object: 'tree',
-          totalObj: 5,
+          firstObj: null,
+          lastObj: 'house',
+          totalObj: 6,
           space: '?m',
           totalSpace: '40m'
         },
         problem: 'Có một hàng gồm 5 cây được trồng cách đều nhau, cuối hàng cây là một ngôi nhà. Khoảng cách từ cây đầu tiên đến ngôi nhà là 40m. Hỏi khoảng cách từ cây đầu tiên đến cây thứ 4 là bao nhiêu, biết khoảng cách từ cây cuối cùng đến ngôi nhà cũng bằng khoảng cách giữa các cây.',
         answer: '32m'
-        }
+      }
     ]
   },
   {
@@ -168,11 +178,13 @@ export const FakeData = [
         type: 'multiple-choice',
         scene: {
           object: 'tree',
-          totalObj: 8,
+          firstObj: 'house',
+          lastObj: 'house',
+          totalObj: 10,
           space: '4m',
           totalSpace: '?m'
         },
-        problem: 'Dọc theo một con đường có 8 cái cây, hai đầu đường là hai cột điện. Hỏi hai cột điện cách nhau bao nhiêu mét, biết khoảng cách giữa cột điện và cây bằng khoảng cách giữa các cây và bằng 4m.',
+        problem: 'Dọc theo một con đường có 8 cái cây, hai đầu đường là ngôi nhà. Hỏi hai ngôi nhà cách nhau bao nhiêu mét, biết khoảng cách giữa nhà và cây bằng khoảng cách giữa các cây và bằng 4m.',
         choices: ['28m', '30m', '32m', '36m'],
         answer: '36m'
       },
@@ -181,11 +193,13 @@ export const FakeData = [
         type: 'multiple-choice',
         scene: {
           object: 'house',
-          totalObj: 9,
+          firstObj: 'tree',
+          lastObj: 'tree',
+          totalObj: 11,
           space: '8m',
           totalSpace: '?m'
         },
-        problem: 'Dọc theo một con đường có 9 ngôi nhà cách đều nhau 8m, hai đầu đường là ngã rẽ. Hỏi con đường này dài bao nhiêu mét (tính từ ngã rẽ này đến ngã rẽ kia) ?',
+        problem: 'Dọc theo một con đường có 9 ngôi nhà cách đều nhau 8m, hai đầu đường là 2 cái cây. Hỏi con đường này dài bao nhiêu mét (tính từ cây này đến cây kia) ?',
         choices: ['96m', '88m', '72m', '80m'],
         answer: '80m'
       },
@@ -194,7 +208,9 @@ export const FakeData = [
         type: 'input',
         scene: {
           object: 'house',
-          totalObj: 4,
+          firstObj: 'human',
+          lastObj: 'human',
+          totalObj: 6,
           space: '?m',
           totalSpace: '50m'
         },
@@ -205,8 +221,10 @@ export const FakeData = [
         id: 4,
         type: 'multiple-choice',
         scene: {
-          object: 'diem',
-          totalObj: 10,
+          object: 'match',
+          firstObj: 'blank',
+          lastObj: 'blank',
+          totalObj: 12,
           space: '3cm',
           totalSpace: '30cm'
         },
@@ -219,7 +237,9 @@ export const FakeData = [
         type: 'input',
         scene: {
           object: 'tree',
-          totalObj: 5,
+          firstObj: 'house',
+          lastObj: 'house',
+          totalObj: 7,
           space: '?m',
           totalSpace: '30m'
         },
@@ -238,12 +258,11 @@ export const FakeData = [
       {
         id: 1,
         type: 'multiple-choice',
-        // scene: {
-        //   object: 'tree',
-        //   totalObj: 16,
-        //   space: '1m',
-        //   totalSpace: '16m'
-        // },
+        scene: {
+          object: 'tree',
+          widthObj: 5,
+          heightObj: 5,
+        },
         problem: 'Một cái hồ hình vuông cạnh 4m. Người ta trồng cây dọc theo bờ hồ, mỗi cây cách nhau 1m. Hỏi người ta sẽ trồng hết bao nhiêu cây.',
         choices: ['15', '14', '16', '18'],
         answer: '16'
@@ -251,25 +270,23 @@ export const FakeData = [
       {
         id: 2,
         type: 'multiple-choice',
-        // scene: {
-        //   object: 'house',
-        //   totalObj: 10,
-        //   space: '2m',
-        //   totalSpace: '20m'
-        // },
-        problem: 'Một sân bóng hình tròn chu vi 20m. Hỏi để lắp đèn xung quanh sân thì cần bao nhiêu tiền, biết mỗi đèn cách nhau 2m và giá tiền mỗi đèn là 100000đ.',
-        choices: ['100000đ', '120000đ', '200000đ', '220000đ'],
-        answer: '100000đ'
+        scene: {
+          object: 'bulb',
+          widthObj: 6,
+          heightObj: 6,
+        },
+        problem: 'Một sân bóng vuông cạnh 10m. Hỏi để lắp đèn xung quanh sân thì cần bao nhiêu tiền, biết mỗi đèn cách nhau 2m và giá tiền mỗi đèn là 100000đ.',
+        choices: ['1000000đ', '1200000đ', '2000000đ', '2200000đ'],
+        answer: '2000000đ'
       },
       {
         id: 3,
         type: 'input',
-        // scene: {
-        //   object: 'house',
-        //   totalObj: 14,
-        //   space: '?m',
-        //   totalSpace: '140m'
-        // },
+        scene: {
+          object: 'house',
+          widthObj: 4,
+          heightObj: 5,
+        },
         problem: 'Một khu nhà hình chữ nhật có một khu vui chơi ở chính giữa. Khu vui chơi có kích thước 30m x 40m. Người ta tính được sẽ xây 14 ngôi nhà xung quanh khu vui chơi này.Hỏi mỗi ngôi nhà phải cách đều nhau bao nhiêu m?',
         answer: '10m'
       },
@@ -277,12 +294,11 @@ export const FakeData = [
         id: 4,
         type: 'multiple-choice',
         scene: {
-          object: 'diem',
-          totalObj: 10,
-          space: '3cm',
-          totalSpace: '30cm'
+          object: 'match',
+          widthObj: 3,
+          heightObj: 4,
         },
-        problem: 'Người ta xếp que diêm theo một đường tròn, mỗi que diêm cách nhau 3cm. Hỏi chu vi đường tròn là bao nhiêu biết người ta xếp được tất cả 10 que diêm.',
+        problem: 'Người ta xếp que diêm theo một hình chữ nhật, mỗi que diêm cách nhau 3cm. Hỏi chu vi hình chữ nhật là bao nhiêu biết người ta xếp được tất cả 10 que diêm.',
         choices: ['24cm', '27cm', '30cm', '33cm'],
         answer: '30cm'
       }

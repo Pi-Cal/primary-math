@@ -32,13 +32,10 @@ export const Chapter2 = ({ show }) => {
     },
   });
 
-  const partNameStyle = useSpring({
-    from: {
-      opacity: open ? 1 : 0, 
-    },
-    to: { 
-      opacity: !open ? 1 : 0, 
-    },
+  const partNameStyle = useTransition(open, {
+    from: { opacity: 0, scale: 2 },
+    enter: { opacity: 1, scale: 1, delay: 500 },
+    leave: { opacity: 0, scale: 2 },
   })
 
   const transApi = useSpringRef();
@@ -72,7 +69,7 @@ export const Chapter2 = ({ show }) => {
         </animated.div>
       ))} 
       {
-        !open ? <animated.div className="chapter-name pe-3 ps-3" style={{...partNameStyle}}>Bài toán trồng cây - <br/>khoảng cách</animated.div> : <></>
+        partNameStyle((style, open)=> !open && <animated.div className="chapter-name" style={{...style}}>Bài toán trồng cây - khoảng cách</animated.div>) 
       }
     </animated.div>
   );

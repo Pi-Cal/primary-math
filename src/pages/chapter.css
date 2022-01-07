@@ -47,11 +47,3 @@
     padding-left: 5px;
     padding-right: 5px;
 }
-
-.chapter-body {
-    z-index: 10;
-}
-
-.chapter-background {
-    z-index: 1;
-}
