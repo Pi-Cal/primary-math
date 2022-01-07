@@ -4,35 +4,8 @@
     background-size: 100% 100%;
 }
 
-.knob {
-    /*background: #61dafb;*/
-    margin-left: 30px;
-    width: 80px
-}
-
-.time {
-    /*background: aqua;*/
-    width: 350px
-}
-
-.clock {
-    /*background: #282c34;*/
-    width: 500px;
-}
-
-.canvasClock {
-    margin-top: 4px;
-    margin-left: -20px;
-}
-
-.canvasTime {
-    margin-top: 20px;
-    margin-left: -10px;
-}
-
 .digital-watch {
-    margin-top: 200px;
-    margin-left: 45px;
+    width: 100%;
 }
 
 .digital-watch .hour,
@@ -133,8 +106,6 @@
 }
 
 .randomTime {
-    margin-top: 30px;
-    margin-left: 75px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: inline-block;
     padding: 15px 25px;
@@ -147,20 +118,19 @@
     background-color: #4CAF50;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 5px 5px 5px rgb(184, 176, 176);
 }
 
 .randomTime:hover {background-color: #3e8e41}
 
 .randomTime:active {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+    background-color: #237526;
+    box-shadow: 5px 5px 5px rgb(184, 176, 176);
+    transform: translateY(3px);
 }
 
 .checkboxTime {
-    margin-top: 50px;
-    margin-left: 80px;
+    width: 100%;
 }
 
 .switch {
@@ -201,7 +171,7 @@
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #6db4ee;
 }
 
 input:focus + .slider {
@@ -215,23 +185,18 @@ input:checked + .slider:before {
 }
 
 .TimeNow {
-    color: red;
-    margin-left: 10px;
+    color: coral;
     float: left;
     font-weight: bold;
     font-size: 17px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.knob {
-    margin-top: 100px;
-}
 
 .controlText {
-    margin-left: 30px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 20px;
-    color: red;
+    color: coral;
 }
 
 .buttonTime {
@@ -243,7 +208,7 @@ input:checked + .slider:before {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 30px 2px 4px;
+    margin-bottom: 15px;
     transition-duration: 0.4s;
     cursor: pointer;
     width: 150px;
@@ -295,4 +260,9 @@ input:checked + .slider:before {
 .button3:hover {
     background-color: #f44336;
     color: white;
+}
+#divKnob {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }

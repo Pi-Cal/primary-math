@@ -89,7 +89,6 @@ export const QuestionModel = ({editable, time, setTime, scale, canvasName, clock
     if (_second == 60) {_second = 0; _minute+=1}
     if (_minute == 60) {_minute = 0; _hour += 1}
     setTime({hour: _hour,minute: _minute,second: _second})
-    console.log(time);
   }, [hour, minute, second]);
 
   useEffect(()=>{
@@ -112,10 +111,7 @@ export const QuestionModel = ({editable, time, setTime, scale, canvasName, clock
         {clockLabel}
       </Row>
       <Row className="d-flex justify-content-center align-items-center overflow-hidden mb-3">
-        {
-          //TODO Them mo hinh 3D tuong ung question
-          <canvas id={canvasName}></canvas>
-        }
+          <canvas id={canvasName} className="w-100 h-100"></canvas>
       </Row>
       {
       editable && 

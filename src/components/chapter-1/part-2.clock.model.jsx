@@ -6,7 +6,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export const Clock = (props) => {
 
-    const {time, setFrame, canvasName='clock-canvas', scale = 1, clockLabel='', idAddTime=true} = props
+    const {time, timeInterval, idAddTime, canvasName='clock-canvas', scale = 1, clockLabel='', } = props
 
     const oldTime = useState({...time});
 
@@ -48,7 +48,6 @@ export const Clock = (props) => {
     loader.load("/models/clocks/Clock2.glb", (glb) => {
       const loadObject = async () => {
         await glb.scene.traverse((child) => {
-            console.log(glb.scene);
           if (child.name == "Hours") {
             child.rotation.y =
             ((time.hour * Math.PI) / 6 +
@@ -86,7 +85,7 @@ export const Clock = (props) => {
       <Row className="d-flex justify-content-center align-items-center overflow-hidden mb-3">
         {
           //TODO Them mo hinh 3D tuong ung question
-          <canvas id={canvasName}></canvas>
+          <canvas id={canvasName} className='w-100 h-100'></canvas>
         }
     </Row>
     </Container>

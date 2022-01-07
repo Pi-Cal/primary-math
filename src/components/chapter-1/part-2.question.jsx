@@ -3,6 +3,15 @@ import { Button, Container, Row } from 'react-bootstrap';
 import './chapter-1.css'
 import { SuccessAnimation, FailAnimation } from '../animation';
 
+export const randonArr = (arr) => {
+    const array = [...arr]
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return [...array]
+}
+
 export const Question = ({question, startTime, endTime}) => {
 
     const [userAnswer, setUserAnswer] = useState('');
@@ -35,7 +44,7 @@ export const Question = ({question, startTime, endTime}) => {
     return(
         <Container className='quiz-container position-relative'>
             <Row className='quiz-request mb-3 h-30 ms-1 me-1 p-3'>{question.request}</Row>
-            <Row className='quiz-body d-flex justify-content-center h-50 align-items-center'>
+            <Row className='quiz-body d-flex justify-content-center h-50 align-items-center mb-3'>
             {
                 (()=>{
                     switch(question.type) {
@@ -49,7 +58,7 @@ export const Question = ({question, startTime, endTime}) => {
                 })()
             }
             </Row>
-            <Row className='position-absolute submit-btn w-100 ps-4 pe-4'>
+            <Row className='position-absolute submit-btn ps-4 pe-4'>
                 <Button onClick={handleSubmit} className='rounded-pill'>Kiểm tra đáp án</Button>
             </Row>
             <SuccessAnimation show={showSuccessAnimation} onHide={()=>setShowSuccessAnimation(false)}/>
@@ -61,14 +70,11 @@ export const Question = ({question, startTime, endTime}) => {
 const SingleChoice = ({answer, setUserAnswer}) => {
     
     const [choiceIndex, setChoiceIndex] = useState('-1');
-    const [cloneAns] = useState(()=>{
-        const array = [...answer]
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return [...array]
-    })
+    const [cloneAns, setCloneAns] = useState(randonArr(answer))
+
+    useEffect(()=>{
+        setCloneAns([...randonArr(answer)])
+    },[answer])
 
     const handleChoice = (e) => {
         setChoiceIndex(e.target.id)

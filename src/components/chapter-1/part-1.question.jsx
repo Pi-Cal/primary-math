@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
 import './chapter-1.css'
 import { SuccessAnimation, FailAnimation } from '../animation';
+import { randonArr } from './part-2.question';
 
 export const Question = ({question, time}) => {
 
@@ -31,7 +32,7 @@ export const Question = ({question, time}) => {
     return(
         <Container className='quiz-container position-relative'>
             <Row className='quiz-request mb-3 h-30 ms-1 me-1 p-3'>{question.request}</Row>
-            <Row className='quiz-body d-flex justify-content-center h-50 align-items-center'>
+            <Row className='quiz-body d-flex justify-content-center h-50 align-items-center mb-3'>
             {
                 (()=>{
                     switch(question.type) {
@@ -45,7 +46,7 @@ export const Question = ({question, time}) => {
                 })()
             }
             </Row>
-            <Row className='position-absolute submit-btn w-100 ps-4 pe-4'>
+            <Row className='submit-btn ps-4 pe-4'>
                 <Button onClick={handleSubmit} className='rounded-pill'>Kiểm tra đáp án</Button>
             </Row>
             <SuccessAnimation show={showSuccessAnimation} onHide={()=>setShowSuccessAnimation(false)}/>
@@ -57,20 +58,16 @@ export const Question = ({question, time}) => {
 const SingleChoice = ({answer, setUserAnswer}) => {
     
     const [choiceIndex, setChoiceIndex] = useState('-1');
-    const [cloneAns] = useState(()=>{
-        const array = [...answer]
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return [...array]
-    })
+    const [cloneAns,setCloneAns] = useState(randonArr(answer))
 
     const handleChoice = (e) => {
         setChoiceIndex(e.target.id)
         setUserAnswer(e.target.innerHTML);
     }
 
+    useEffect(()=>{
+        setCloneAns([...randonArr(answer)])
+    },[answer])
 
     return(
         <Row className='d-flex justify-content-center mb-3'>
