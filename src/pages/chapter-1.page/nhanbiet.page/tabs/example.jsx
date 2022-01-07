@@ -27,15 +27,15 @@ export const Example = () => {
             }else if (newHour >= 9) {
                 figHour.rotation.x = 0
                 figHour.rotation.z = 0
-                figHour.rotation.y = (60 - newHour) * (Math.PI / 6)
+                figHour.rotation.y = (12 - newHour) * (Math.PI / 6)
             } else if (newHour < 6) {
                 figHour.rotation.x = - Math.PI
                 figHour.rotation.z = - Math.PI
-                figHour.rotation.y = (30 - newHour) * (Math.PI / 6) * -1
+                figHour.rotation.y = (6 - newHour) * (Math.PI / 6) * -1
             } else {
                 figHour.rotation.x = - Math.PI
                 figHour.rotation.z = Math.PI
-                figHour.rotation.y = (newHour - 30) * (Math.PI / 6) + 0.01
+                figHour.rotation.y = (newHour - 6) * (Math.PI / 6) + 0.01
             }
         }
 
@@ -174,6 +174,7 @@ export const Example = () => {
 
         let controls = new TransformControls(camera, renderer.domElement)
         controls.setMode('rotate')
+        controls.setSize(0.6)
         scene.add(controls)
 
         //Models
@@ -226,14 +227,15 @@ export const Example = () => {
             } else newMinute = 60 - clockModel.getChildByName("Minutes").rotation.y / (Math.PI / 30)
 
             if (clockModel.getChildByName("Hours").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) <= 2) {
-                newHour = (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
+                newHour = (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 30)
             } else if (clockModel.getChildByName("Hours").rotation.y <=0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
-                newHour = 6 - (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
+                newHour = 30 - (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 30)
             } else if (clockModel.getChildByName("Hours").rotation.y > 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
-                newHour = 6 + clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
-            } else newHour = 12 - clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
+                newHour = 30 + clockModel.getChildByName("Hours").rotation.y / (Math.PI / 30)
+            } else newHour = 60 - clockModel.getChildByName("Hours").rotation.y / (Math.PI / 30)
 
-            newHour = Math.round(newHour)
+            newHour = newHour / 5
+            newHour = Math.trunc(newHour)
             newSecond = Math.round(newSecond)
             newMinute = Math.round(newMinute)
             if (newSecond === 60) newSecond = 0
