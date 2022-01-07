@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 
 const Layout = ({children}) => {
     return (
-        <Tabs defaultActiveKey="example">
+        <Tabs defaultActiveKey="practice">
             {children.map(child => (
                 <Tab key={child.props.tabKey} eventKey={child.props.tabKey} title={child.props.name}>
                     {child}
