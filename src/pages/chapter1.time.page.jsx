@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ChapterPartBox } from "../components/chapter.part.box";
 import "./chapter.css";
 
 import {

@@ -7,11 +7,10 @@ import { FakeData } from '../../data/chapter-2.data';
 const ChapterPart = () => {
     const { partId } = useParams();
     const practiceQuestionList = FakeData[parseInt(partId) - 1].questions;
-    console.log(practiceQuestionList);
     return (
         <Layout>
-            <Example tabKey="example" name="Ví dụ" />
-            <Practice tabKey="practice" name="Luyện tập" questions={practiceQuestionList}/>
+            <Example tabKey="example" name="Ví dụ" partId={parseInt(partId)} />
+            <Practice tabKey="practice" name="Luyện tập" partId={parseInt(partId)} questions={practiceQuestionList}/>
         </Layout>
     )
 }

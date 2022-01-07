@@ -9,7 +9,7 @@ const ThreeJSComponent = ({index, questionList}) => {
     return (
         <div className="w-100 h-100 canvas-container">
             <Suspense fallback={<Spinner />}>
-                <Canvas>
+                <Canvas camera={{position: [0, 0, 10]}}>
                     <color attach="background" args={["#63acff"]} />
                     <OrbitControls />
                     <ambientLight intensity={-1} />

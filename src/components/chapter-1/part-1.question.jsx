@@ -55,7 +55,6 @@ export const Question = ({question, time}) => {
 }
 
 const SingleChoice = ({answer, setUserAnswer}) => {
-    
     const [choiceIndex, setChoiceIndex] = useState('-1');
     const [cloneAns] = useState(()=>{
         const array = [...answer]
