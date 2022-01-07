@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { Container } from 'react-bootstrap';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { DragControls} from "three/examples/jsm/controls/DragControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import './part-2.tabs.css'
 
@@ -22,13 +21,8 @@ export const Example = () => {
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.gammaOutput = true;
 
-        let light = new THREE.AmbientLight(0xffffff, 1);
+        let light = new THREE.AmbientLight(0xffffff, 0.7);
         scene.add(light);
-
-        let pointLight = new THREE.PointLight(0xffffff, 1)
-        pointLight.position.y = 10
-        pointLight.position.x = 5
-        scene.add(pointLight)
 
         let camera = new THREE.PerspectiveCamera(
             75,
@@ -36,13 +30,14 @@ export const Example = () => {
             1,
             1000
         );
-        camera.position.z = 5;
+        camera.position.z = 30;
+        camera.position.y = 5
 
         let loader = new GLTFLoader();
 
-        loader.load("/models/clocks/Clock2.glb", (glb) => {
+        loader.load("/models/school/home2school.glb", (glb) => {
             scene.add(glb.scene);
-            new DragControls([glb.scene], camera, renderer.domElement);
+            glb.scene.rotation.y = - Math.PI / 2
             animate();
         });
 

@@ -211,40 +211,37 @@ export const Example = () => {
         let oldRotation = "null";
 
         controls.addEventListener('objectChange', () => {
-            let type = document.getElementById("check").getAttribute("class")
+            let newSecond, newMinute, newHour
+            if (clockModel.getChildByName("Seconds").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) <= 2) {
+                newSecond = (clockModel.getChildByName("Seconds").rotation.y * -1) / (Math.PI / 30)
+            } else if (clockModel.getChildByName("Seconds").rotation.y <=0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) > 2){
+                newSecond = 30 - (clockModel.getChildByName("Seconds").rotation.y * -1) / (Math.PI / 30)
+            } else if (clockModel.getChildByName("Seconds").rotation.y > 0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) > 2){
+                newSecond = 30 + clockModel.getChildByName("Seconds").rotation.y / (Math.PI / 30)
+            } else newSecond = 60 - clockModel.getChildByName("Seconds").rotation.y / (Math.PI / 30)
 
-                let newSecond, newMinute, newHour
-                document.getElementById("check").innerText = 'x' + clockModel.getChildByName("Seconds").rotation.x + '\ny' + clockModel.getChildByName("Seconds").rotation.y + '\nz' + clockModel.getChildByName("Seconds").rotation.z
-                if (clockModel.getChildByName("Seconds").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) <= 2) {
-                    newSecond = (clockModel.getChildByName("Seconds").rotation.y * -1) / (Math.PI / 30)
-                } else if (clockModel.getChildByName("Seconds").rotation.y <=0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) > 2){
-                    newSecond = 30 - (clockModel.getChildByName("Seconds").rotation.y * -1) / (Math.PI / 30)
-                } else if (clockModel.getChildByName("Seconds").rotation.y > 0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) > 2){
-                    newSecond = 30 + clockModel.getChildByName("Seconds").rotation.y / (Math.PI / 30)
-                } else newSecond = 60 - clockModel.getChildByName("Seconds").rotation.y / (Math.PI / 30)
+            if (clockModel.getChildByName("Minutes").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) <= 2) {
+                newMinute = (clockModel.getChildByName("Minutes").rotation.y * -1) / (Math.PI / 30)
+            } else if (clockModel.getChildByName("Minutes").rotation.y <=0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) > 2){
+                newMinute = 30 - (clockModel.getChildByName("Minutes").rotation.y * -1) / (Math.PI / 30)
+            } else if (clockModel.getChildByName("Minutes").rotation.y > 0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) > 2){
+                newMinute = 30 + clockModel.getChildByName("Minutes").rotation.y / (Math.PI / 30)
+            } else newMinute = 60 - clockModel.getChildByName("Minutes").rotation.y / (Math.PI / 30)
 
-                if (clockModel.getChildByName("Minutes").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) <= 2) {
-                    newMinute = (clockModel.getChildByName("Minutes").rotation.y * -1) / (Math.PI / 30)
-                } else if (clockModel.getChildByName("Minutes").rotation.y <=0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) > 2){
-                    newMinute = 30 - (clockModel.getChildByName("Minutes").rotation.y * -1) / (Math.PI / 30)
-                } else if (clockModel.getChildByName("Minutes").rotation.y > 0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) > 2){
-                    newMinute = 30 + clockModel.getChildByName("Minutes").rotation.y / (Math.PI / 30)
-                } else newMinute = 60 - clockModel.getChildByName("Minutes").rotation.y / (Math.PI / 30)
+            if (clockModel.getChildByName("Hours").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) <= 2) {
+                newHour = (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
+            } else if (clockModel.getChildByName("Hours").rotation.y <=0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
+                newHour = 6 - (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
+            } else if (clockModel.getChildByName("Hours").rotation.y > 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
+                newHour = 6 + clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
+            } else newHour = 12 - clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
 
-                if (clockModel.getChildByName("Hours").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) <= 2) {
-                    newHour = (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
-                } else if (clockModel.getChildByName("Hours").rotation.y <=0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
-                    newHour = 6 - (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
-                } else if (clockModel.getChildByName("Hours").rotation.y > 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
-                    newHour = 6 + clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
-                } else newHour = 12 - clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
-
-                newHour = Math.round(newHour)
-                newSecond = Math.round(newSecond)
-                newMinute = Math.round(newMinute)
-                if (newSecond === 60) newSecond = 0
-                if (newMinute === 60) newMinute = 0
-                if (newHour === 12) newHour = 0
+            newHour = Math.round(newHour)
+            newSecond = Math.round(newSecond)
+            newMinute = Math.round(newMinute)
+            if (newSecond === 60) newSecond = 0
+            if (newMinute === 60) newMinute = 0
+            if (newHour === 12) newHour = 0
             renderTime(newHour, newMinute, newSecond)
         })
 
