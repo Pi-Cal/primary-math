@@ -9,7 +9,7 @@ const ChapterPart = () => {
     const practiceQuestionList = FakeData[parseInt(partId) - 1].questions;
     return (
         <Layout>
-            <Example tabKey="example" name="Ví dụ" partId={parseInt(partId)} />
+            <Example tabKey="example" name="Lý thuyết" partId={parseInt(partId)} />
             <Practice tabKey="practice" name="Luyện tập" partId={parseInt(partId)} questions={practiceQuestionList}/>
         </Layout>
     )
