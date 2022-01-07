@@ -6,7 +6,8 @@
 
 .knob {
     /*background: #61dafb;*/
-    width: 100px
+    margin-left: 30px;
+    width: 80px
 }
 
 .time {
@@ -31,7 +32,7 @@
 
 .digital-watch {
     margin-top: 200px;
-    margin-left: 60px;
+    margin-left: 45px;
 }
 
 .digital-watch .hour,

@@ -1,45 +1,107 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Image, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import './example.css'
 import { TransformControls } from "three/examples/jsm/controls/TransformControls.js";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export const Example = () => {
     let [figSecond, setFigSecond] = useState(null);
     let [figMinute, setFigMinute] = useState(null);
     let [figHour, setFigHour] = useState(null);
-    let [hour, setHour] = useState(0);
-    let [minute, setMinute] = useState(0);
-    let [second, setSecond] = useState(0);
+    let hour = 0, minute = 0, second = 0, SecondRotationY = 0, MinuteRotationY = 0, HourRotationY = 0
     const [timeNow, setTimeNow] = useState(0)
 
     let rotation = "null";
 
-    useEffect(() => {
+    function renderClock() {
+        if (hour === 12) hour = 0
+        if (minute === 60) minute = 0
+        if (second === 60) second = 0
         if (figHour){
-            figHour.rotation.x = 0
-            figHour.rotation.z = 0
-            figHour.rotation.y =
-                ((hour * Math.PI) / 6 +
-                    (minute * Math.PI) / (6 * 60) +
-                    (second * Math.PI) / (360 * 60)) *
-                -1;
+            let newHour = hour + (minute * (1/60))
+            if (newHour <= 3) {
+                figHour.rotation.x = 0
+                figHour.rotation.z = 0
+                figHour.rotation.y = newHour * (Math.PI / 6) * -1
+            }else if (newHour >= 9) {
+                figHour.rotation.x = 0
+                figHour.rotation.z = 0
+                figHour.rotation.y = (60 - newHour) * (Math.PI / 6)
+            } else if (newHour < 6) {
+                figHour.rotation.x = - Math.PI
+                figHour.rotation.z = - Math.PI
+                figHour.rotation.y = (30 - newHour) * (Math.PI / 6) * -1
+            } else {
+                figHour.rotation.x = - Math.PI
+                figHour.rotation.z = Math.PI
+                figHour.rotation.y = (newHour - 30) * (Math.PI / 6) + 0.01
+            }
         }
 
         if (figMinute){
-            figMinute.rotation.x = 0
-            figMinute.rotation.z = 0
-            figMinute.rotation.y =
-                ((minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60)) * -1;
+            let newMinute = minute + (second * (1/60))
+            if (newMinute <= 15) {
+                figMinute.rotation.x = 0
+                figMinute.rotation.z = 0
+                figMinute.rotation.y = newMinute * (Math.PI / 30) * -1
+            }else if (newMinute >= 45) {
+                figMinute.rotation.x = 0
+                figMinute.rotation.z = 0
+                figMinute.rotation.y = (60 - newMinute) * (Math.PI / 30)
+            } else if (newMinute < 30) {
+                figMinute.rotation.x = - Math.PI
+                figMinute.rotation.z = - Math.PI
+                figMinute.rotation.y = (30 - newMinute) * (Math.PI / 30) * -1
+            } else {
+                figMinute.rotation.x = - Math.PI
+                figMinute.rotation.z = Math.PI
+                figMinute.rotation.y = (newMinute - 30) * (Math.PI / 30) + 0.01
+            }
         }
         if (figSecond) {
-            figSecond.rotation.x = 0
-            figSecond.rotation.z = 0
-            figSecond.rotation.y = ((second * Math.PI) / 30) * -1;
+            if (second <= 15) {
+                figSecond.rotation.x = 0
+                figSecond.rotation.z = 0
+                figSecond.rotation.y = second * (Math.PI / 30) * -1
+            }else if (second >= 45) {
+                figSecond.rotation.x = 0
+                figSecond.rotation.z = 0
+                figSecond.rotation.y = (60 - second) * (Math.PI / 30)
+            } else if (second < 30) {
+                figSecond.rotation.x = - Math.PI
+                figSecond.rotation.z = - Math.PI
+                figSecond.rotation.y = (30 - second) * (Math.PI / 30) * -1
+            } else {
+                figSecond.rotation.x = - Math.PI
+                figSecond.rotation.z = Math.PI
+                figSecond.rotation.y = (second - 30) * (Math.PI / 30) + 0.02
+            }
+            HourRotationY = figHour.rotation.y
+            MinuteRotationY = figMinute.rotation.y
+            SecondRotationY = figSecond.rotation.y
+            renderTime(hour,minute,second)
         }
-    }, [hour, minute, second]);
+    }
+
+    async function randomTime() {
+        hour = Math.round(Math.random() * 12)
+        minute = Math.round(Math.random() * 60)
+        second = Math.round(Math.random() * 60)
+        renderClock()
+    }
+
+    function renderTime(h,m,s) {
+        let hour = formatTime(h)
+        let minute = formatTime(m)
+        let second = formatTime(s)
+        document.getElementById("hour-1").setAttribute("class","num-"+hour.substr(0,1))
+        document.getElementById("hour-2").setAttribute("class","num-"+hour.substr(1,1))
+        document.getElementById("minute-1").setAttribute("class","num-"+minute.substr(0,1))
+        document.getElementById("minute-2").setAttribute("class","num-"+minute.substr(1,1))
+        document.getElementById("second-1").setAttribute("class","num-"+second.substr(0,1))
+        document.getElementById("second-2").setAttribute("class","num-"+second.substr(1,1))
+    }
 
     function formatTime(value){
         if (value < 10) return '0' + value;
@@ -61,25 +123,18 @@ export const Example = () => {
             document.getElementById("checkboxTime").style.marginTop = "133px"
             document.getElementById("randomTime").style.display = "none"
             document.getElementById("divKnob").style.display = "none"
+            changeControl(0,"null")
         }
         function changeTime() {
             if (document.getElementById("buttonControl").getAttribute("class") === "false") return
             let date = new Date
-            let hour = formatTime(date.getHours())
-            let minute = formatTime(date.getMinutes())
-            let second = formatTime(date.getSeconds())
 
-            setHour(date.getHours())
-            setMinute(date.getMinutes())
-            setSecond(date.getSeconds())
 
-            document.getElementById("hour-1").setAttribute("class","num-"+hour.substr(0,1))
-            document.getElementById("hour-2").setAttribute("class","num-"+hour.substr(1,1))
-            document.getElementById("minute-1").setAttribute("class","num-"+minute.substr(0,1))
-            document.getElementById("minute-2").setAttribute("class","num-"+minute.substr(1,1))
-            document.getElementById("second-1").setAttribute("class","num-"+second.substr(0,1))
-            document.getElementById("second-2").setAttribute("class","num-"+second.substr(1,1))
-            document.getElementById("check").innerText = 'x' + figSecond.rotation.x + '\ny' + figSecond.rotation.y + '\nz' + figSecond.rotation.z
+            hour = date.getHours()
+            minute = date.getMinutes()
+            second = date.getSeconds()
+            renderClock()
+
             setTimeout(changeTime, 1000)
         }
         if (timeNow === 1) changeTime();
@@ -89,6 +144,7 @@ export const Example = () => {
     useEffect(() => {
         //Scene
         let scene = new THREE.Scene()
+        scene.add(new THREE.GridHelper(1000, 10, 0x888888, 0x444444))
         let canvasExampleChapter1 = document.getElementById("canvasClockExampleChapter1")
 
         //Render
@@ -116,7 +172,7 @@ export const Example = () => {
             1,
             1000
         );
-        camera.position.z = 2;
+        camera.position.z = 1.75;
 
         let controls = new TransformControls(camera, renderer.domElement)
         controls.setMode('rotate')
@@ -155,9 +211,41 @@ export const Example = () => {
         let oldRotation = "null";
 
         controls.addEventListener('objectChange', () => {
-            // clockModel.getChildByName("Seconds").rotation.x = 0
-            // clockModel.getChildByName("Seconds").rotation.z = 0
-            document.getElementById("check").innerText = 'x' + clockModel.getChildByName("Seconds").rotation.x + '\ny' + clockModel.getChildByName("Seconds").rotation.y + '\nz' + clockModel.getChildByName("Seconds").rotation.z
+            let type = document.getElementById("check").getAttribute("class")
+
+                let newSecond, newMinute, newHour
+                document.getElementById("check").innerText = 'x' + clockModel.getChildByName("Seconds").rotation.x + '\ny' + clockModel.getChildByName("Seconds").rotation.y + '\nz' + clockModel.getChildByName("Seconds").rotation.z
+                if (clockModel.getChildByName("Seconds").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) <= 2) {
+                    newSecond = (clockModel.getChildByName("Seconds").rotation.y * -1) / (Math.PI / 30)
+                } else if (clockModel.getChildByName("Seconds").rotation.y <=0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) > 2){
+                    newSecond = 30 - (clockModel.getChildByName("Seconds").rotation.y * -1) / (Math.PI / 30)
+                } else if (clockModel.getChildByName("Seconds").rotation.y > 0 && Math.abs(clockModel.getChildByName("Seconds").rotation.z) > 2){
+                    newSecond = 30 + clockModel.getChildByName("Seconds").rotation.y / (Math.PI / 30)
+                } else newSecond = 60 - clockModel.getChildByName("Seconds").rotation.y / (Math.PI / 30)
+
+                if (clockModel.getChildByName("Minutes").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) <= 2) {
+                    newMinute = (clockModel.getChildByName("Minutes").rotation.y * -1) / (Math.PI / 30)
+                } else if (clockModel.getChildByName("Minutes").rotation.y <=0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) > 2){
+                    newMinute = 30 - (clockModel.getChildByName("Minutes").rotation.y * -1) / (Math.PI / 30)
+                } else if (clockModel.getChildByName("Minutes").rotation.y > 0 && Math.abs(clockModel.getChildByName("Minutes").rotation.z) > 2){
+                    newMinute = 30 + clockModel.getChildByName("Minutes").rotation.y / (Math.PI / 30)
+                } else newMinute = 60 - clockModel.getChildByName("Minutes").rotation.y / (Math.PI / 30)
+
+                if (clockModel.getChildByName("Hours").rotation.y <= 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) <= 2) {
+                    newHour = (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
+                } else if (clockModel.getChildByName("Hours").rotation.y <=0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
+                    newHour = 6 - (clockModel.getChildByName("Hours").rotation.y * -1) / (Math.PI / 6)
+                } else if (clockModel.getChildByName("Hours").rotation.y > 0 && Math.abs(clockModel.getChildByName("Hours").rotation.z) > 2){
+                    newHour = 6 + clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
+                } else newHour = 12 - clockModel.getChildByName("Hours").rotation.y / (Math.PI / 6)
+
+                newHour = Math.round(newHour)
+                newSecond = Math.round(newSecond)
+                newMinute = Math.round(newMinute)
+                if (newSecond === 60) newSecond = 0
+                if (newMinute === 60) newMinute = 0
+                if (newHour === 12) newHour = 0
+            renderTime(newHour, newMinute, newSecond)
         })
 
         const animate = () => {
@@ -165,8 +253,8 @@ export const Example = () => {
             let rotation = document.getElementById("check").getAttribute("class")
             if (oldRotation !== rotation) {
                 controls.detach()
+                oldRotation = rotation
                 if (rotation !== "null"){
-                    oldRotation = rotation
                     controls.attach(clockModel.getChildByName(rotation))
                 }
             }
@@ -178,7 +266,15 @@ export const Example = () => {
     }, [])
 
     function changeControl(num, value){
+        if (num === 0) {
+            document.getElementById("check").setAttribute("class","null")
+            document.getElementById("button1").setAttribute("class","buttonTime button1")
+            document.getElementById("button2").setAttribute("class","buttonTime button2")
+            document.getElementById("button3").setAttribute("class","buttonTime button3")
+            return;
+        }
         if (rotation === value) {
+            if (value === "null") return;
             rotation = "null"
             document.getElementById("check").setAttribute("class","null")
             document.getElementById("button" + num).setAttribute("class","buttonTime button"+num)
@@ -271,7 +367,7 @@ export const Example = () => {
                         </svg>
                     </div>
                 </div>
-                <button className={"randomTime"} id={"randomTime"}>Thời gian ngẫu nhiên</button>
+                <button className={"randomTime"} id={"randomTime"} onClick={() => randomTime()}>Thời gian ngẫu nhiên</button>
                 <div className={"checkboxTime"} id={"checkboxTime"}>
                 <label className="switch">
                     <input type={"checkbox"} id="buttonControl" className={"true"} onClick={() => setTimeNow(1 - timeNow)}/>
