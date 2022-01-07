@@ -73,12 +73,13 @@ export const FakeData = [
         id: 6,
         type: 'multiple-choice',
         scene: {
-          object: 'bulb',
-          widthObj: 3,
-          heightObj: 4,
+          object: 'tree',
+          totalObj: 13,
+          space: '1m',
+          totalSpace: ''
         },
-        problem: 'Người ta lắp đèn xung quanh một sân chơi hình chữ nhật 3m x 4m. Hỏi để lắp được xung quanh sân thì cần bao nhiêu đèn, biết mỗi đèn cách nhau 1m và 4 góc sân đều có đèn',
-        choices: ['14', '18', '10', '16'],
+        problem: 'Một người chạy với tốc độ 2m/s, anh chạy từ cây đầu tiên đến cây cuối cùng mất thời gian là 6 giây. Hỏi anh đã chạy qua bao nhiêu cây, biết các cây cách nhau 1m.',
+        choices: ['11', '12', '13', '14'],
         answer: '14'
       }
     ]
@@ -312,6 +313,36 @@ export const FakeData = [
         problem: 'Người ta xếp que diêm theo một hình chữ nhật, mỗi que diêm cách nhau 3cm. Hỏi chu vi hình chữ nhật là bao nhiêu biết người ta xếp được tất cả 10 que diêm.',
         choices: ['24cm', '27cm', '30cm', '33cm'],
         answer: '30cm'
+      },
+      {
+        id: 5,
+        type: 'multiple-choice',
+        scene: {
+          object: 'bulb',
+          widthObj: 3,
+          heightObj: 4,
+          width: "?m",
+          height: "?m",
+          space: "1m"
+        },
+        problem: 'Người ta xếp bóng đèn thành một đoạn thẳng, mỗi bóng cách nhau 1m thì thấy xếp được đoạn thẳng dài 13m. Hỏi nếu lấy số bóng này xếp thành hình chữ nhật, mỗi bóng cũng cách nhau 1m thì chu vi hình chữ nhật là bao nhiêu?',
+        choices: ['13', '14', '15', '16'],
+        answer: '14'
+      },
+      {
+        id: 6,
+        type: 'multiple-choice',
+        scene: {
+          object: 'tree',
+          widthObj: 5,
+          heightObj: 5,
+          width: "?m",
+          height: "?m",
+          space: "1m"
+        },
+        problem: 'Một người chạy với tốc độ 2m/s, anh chạy một vòng sân mất thời gian là 10 giây. Hỏi để trồng cây quanh sân thì cần bao nhiêu cây, biết các cây cách nhau 1m.',
+        choices: ['18', '20', '22', '24'],
+        answer: '20'
       }
     ]
   },
