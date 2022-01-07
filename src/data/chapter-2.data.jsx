@@ -68,6 +68,19 @@ export const FakeData = [
         problem: 'Các bóng đèn được xếp thành 1 hàng cách đều nhau 1m. Khoảng cách từ bóng đầu tiên đến bóng cuối cùng là 14m. Nếu giá tiền mỗi bóng là 50000đ thì cần bao nhiêu tiền để lắp hết tất cả các bóng?',
         choices: ['750000đ', '760000đ', '700000đ', '800000đ'],
         answer: '750000đ'
+      },
+      {
+        id: 6,
+        type: 'multiple-choice',
+        scene: {
+          object: 'light',
+          totalObj: 5,
+          space: '1m',
+          totalSpace: '4m'
+        },
+        problem: 'Người ta lắp đèn xung quanh một sân chơi hình chữ nhật 3m x 4m. Hỏi để lắp được xung quanh sân thì cần bao nhiêu đèn, biết mỗi đèn cách nhau 1m và 4 góc sân đều có đèn',
+        choices: ['14', '18', '10', '16'],
+        answer: '14'
       }
     ]
   },
@@ -140,7 +153,7 @@ export const FakeData = [
         },
         problem: 'Có một hàng gồm 5 cây được trồng cách đều nhau, cuối hàng cây là một ngôi nhà. Khoảng cách từ cây đầu tiên đến ngôi nhà là 40m. Hỏi khoảng cách từ cây đầu tiên đến cây thứ 4 là bao nhiêu, biết khoảng cách từ cây cuối cùng đến ngôi nhà cũng bằng khoảng cách giữa các cây.',
         answer: '32m'
-      }
+        }
     ]
   },
   {
@@ -159,7 +172,7 @@ export const FakeData = [
           space: '4m',
           totalSpace: '?m'
         },
-        problem: 'Dọc theo một con đường có 8 cái cây, hai đầu đường là hai cột điện. Hỏi cây đầu tiên cách cột điện bao nhiêu mét, biết khoảng cách giữa cột điện và cây bằng khoảng cách giữa các cây và bằng 4m.',
+        problem: 'Dọc theo một con đường có 8 cái cây, hai đầu đường là hai cột điện. Hỏi hai cột điện cách nhau bao nhiêu mét, biết khoảng cách giữa cột điện và cây bằng khoảng cách giữa các cây và bằng 4m.',
         choices: ['28m', '30m', '32m', '36m'],
         answer: '36m'
       },
@@ -185,7 +198,7 @@ export const FakeData = [
           space: '?m',
           totalSpace: '50m'
         },
-        problem: 'Hai người nhận thấy khoảng cách mình đứng cách ngôi nhà gần nhất bằng với khoảng cách giữa các ngôi nhà với nhau. Khoảng cách giữa 2 người là 50m. Hỏi khoảng cách giữa các ngôi nhà là bao nhiêu?',
+        problem: 'Hai người nhận thấy khoảng cách mình đứng cách ngôi nhà gần nhất bằng với khoảng cách giữa các ngôi nhà với nhau. Khoảng cách giữa 2 người là 50m. Hỏi khoảng cách giữa các ngôi nhà là bao nhiêu, biết giữa 2 người có 4 ngôi nhà?',
         answer: '10m'
       },
       {

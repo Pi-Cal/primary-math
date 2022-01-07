@@ -1,5 +1,4 @@
 import React from 'react';
-import * as LottiePlayer from "@lottiefiles/lottie-player";
 import {animated, useTransition} from 'react-spring'
 import './animation.css'
 
