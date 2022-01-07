@@ -79,11 +79,13 @@ export default function AnimateBox({totalObj, totalSpace, space, object, firstOb
             {
                 xSpace.map((x, index) => (
                     <group key={index}>
+                        {index === Math.floor(xSpace.length/2) &&
                         <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[x, ySpace + 0.3, 0]}>
                             <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
                                 {space}
                             </Text>
                         </Billboard>
+                        }
                         <mesh key={index} position={[x, ySpace, 0]}>
                             <boxGeometry args={[1.95, 0.1, 0.1]} />
                         </mesh>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { OrbitControls } from '@react-three/drei';
+import { Billboard, OrbitControls, Text } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React, { Suspense, useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
@@ -39,6 +39,9 @@ const Chapter4Scene = ({index, questionList}) => {
     const scene = questionList[index].scene;
     const [width, setWidth] = useState(scene.widthObj);
     const [height, setHeight] = useState(scene.heightObj);
+    const [widthSz, setWidthSz] = useState(scene.width);
+    const [heightSz, setHeightSz] = useState(scene.height);
+    const [space, setSpace] = useState(scene.space);
     const [obj, setObj] = useState(scene.object);
     const [pos, setPos] = useState(() => generatePos(width, height))
     
@@ -47,6 +50,9 @@ const Chapter4Scene = ({index, questionList}) => {
         setWidth(newScene.widthObj);
         setHeight(newScene.heightObj);
         setObj(newScene.object);
+        setSpace(newScene.space);
+        setWidthSz(newScene.width);
+        setHeightSz(newScene.height);
         setPos(() => generatePos(newScene.widthObj, newScene.heightObj));
     }, [index])
 
@@ -89,6 +95,40 @@ const Chapter4Scene = ({index, questionList}) => {
                     <mesh position={[-width + 1, 0, height - 1]} rotation={[0, Math.PI / 2, 0]}>
                         <boxGeometry args={[2 * (height - 1), 0.1, 0.1]} />
                     </mesh>
+                    <group>
+                        <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[0, yPos - 0.1, -1]}>
+                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                                {widthSz}
+                            </Text>
+                        </Billboard>
+                        <mesh position={[0, yPos - 0.5, -1]}>
+                            <boxGeometry args={[2 * (width - 1), 0.1, 0.1]} />
+                        </mesh>
+                    </group>
+                    <group>
+                        <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[-width, yPos - 0.1, height - 1]}>
+                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                                {heightSz}
+                            </Text>
+                        </Billboard>
+                        <mesh position={[-width, yPos - 0.5, height - 1]} rotation={[0, Math.PI / 2, 0]}>
+                            <boxGeometry args={[2 * (height - 1), 0.1, 0.1]} />
+                        </mesh>
+                    </group>
+                    {
+                        width % 2 === 0?
+                    <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[0, yPos - 0.1, 0]}>
+                        <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                            {space}
+                        </Text>
+                    </Billboard>
+                    :
+                    <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[-1, yPos - 0.1, 0]}>
+                        <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                            {space}
+                        </Text>
+                    </Billboard>
+                    }
                 </Canvas>
             </Suspense>
         </div>
