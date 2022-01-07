@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-export const Home2School = ({frame = 2}) => {
+export const Home2School = ({reverse = false}) => {
     useEffect(() => {
         let scene = new THREE.Scene();
         let canvasExampleChapter1 = document.getElementById("canvasExampleChapter1Part2");
@@ -33,18 +33,32 @@ export const Home2School = ({frame = 2}) => {
 
         let loader = new GLTFLoader();
 
+        let mixer
+
         loader.load("/models/school/home2school.glb", (glb) => {
             glb.scene.position.y = -16;
-            scene.add(glb.scene);
             glb.scene.rotation.y = - Math.PI / 2
+            scene.add(glb.scene);
+
+            mixer = new THREE.AnimationMixer(glb.scene);
+            const clips = glb.animations;
+            const clip = THREE.AnimationClip.findByName(clips, 'Armature|mixamo.com|Layer0.002');
+            const action = mixer.clipAction(clip);
+            action.setLoop(THREE.LoopPingPong, 1);
+            action.timeScale = reverse ? -1 : 1;
+            action.play();
+
             animate();
         });
 
         new OrbitControls(camera, renderer.domElement);
 
+        const clock = new THREE.Clock();
+
         const animate = () => {
             requestAnimationFrame(animate);
             if (camera) {
+                mixer.update(clock.getDelta());
                 renderer.render(scene, camera);
             }
         };

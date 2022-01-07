@@ -372,7 +372,7 @@ export const Example = () => {
             </Col>
             <Col md='3' xs='3' className={"knob d-flex justify-content-center align-items-center"} id={"knob"}>
                 <div id={"divKnob"}>
-                    <p className={"controlText fw-bold"}>Điều khiển </p>
+                    <div className={"controlText fw-bold w-100 text-center mb-3"}>Điều khiển </div>
                     <button className={"buttonTime button1"} id={"button1"} onClick={() => changeControl("1","Hours")}>Kim giờ</button>
                     <button className={"buttonTime button2"} id={"button2"} onClick={() => changeControl("2","Minutes")}>Kim phút</button>
                     <button className={"buttonTime button3"} id={"button3"} onClick={() => changeControl("3","Seconds")}>Kim giây</button>
