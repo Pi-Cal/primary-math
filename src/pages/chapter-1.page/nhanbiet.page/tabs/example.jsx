@@ -15,7 +15,7 @@ export const Example = () => {
     let rotation = "null";
 
     function renderClock() {
-        if (hour === 12) hour = 0
+        if (hour === 12) hour = 12
         if (minute === 60) minute = 0
         if (second === 60) second = 0
         if (figHour){
@@ -85,7 +85,7 @@ export const Example = () => {
     }
 
     async function randomTime() {
-        hour = Math.round(Math.random() * 12)
+        hour = Math.round(Math.random() * 12) + 1
         minute = Math.round(Math.random() * 60)
         second = Math.round(Math.random() * 60)
         renderClock()
@@ -112,16 +112,14 @@ export const Example = () => {
     useEffect(() => {
         if (timeNow === 0) {
             document.getElementById("buttonControl").setAttribute("class","false")
-            document.getElementById("TextTimeNow").style.color = "red"
-            document.getElementById("randomTime").style.display = "block"
-            document.getElementById("checkboxTime").style.marginTop = "50px"
-            document.getElementById("divKnob").style.display = "block"
+            document.getElementById("TextTimeNow").style.color = "coral"
+            document.getElementById("randomTime").style.opacity = "1"
+            document.getElementById("divKnob").style.display = "flex"
         }
         else {
             document.getElementById("buttonControl").setAttribute("class","true")
             document.getElementById("TextTimeNow").style.color = "blue"
-            document.getElementById("checkboxTime").style.marginTop = "133px"
-            document.getElementById("randomTime").style.display = "none"
+            document.getElementById("randomTime").style.opacity = "0"
             document.getElementById("divKnob").style.display = "none"
             changeControl(0,"null")
         }
@@ -172,7 +170,7 @@ export const Example = () => {
             1,
             1000
         );
-        camera.position.z = 1.75;
+        camera.position.z = 3;
 
         let controls = new TransformControls(camera, renderer.domElement)
         controls.setMode('rotate')
@@ -198,7 +196,6 @@ export const Example = () => {
             glb.scene.rotation.x = Math.PI / 2
         });
 
-        // new OrbitControls(camera, renderer.domElement)
 
         window.addEventListener('resize', function() {
             let width = window.innerWidth
@@ -286,13 +283,10 @@ export const Example = () => {
     }
 
     return(
-        <Container className='Container'>
-        {
-            //TODO -- Quoc
-        }
-        <Row>
-            <Col className={"time"}>
-                <div className="digital-watch">
+        <Container className='Container vh-80'>
+        <Row className='h-100 w-100'>
+            <Col md='3' xs='3' className={"time d-flex flex-column justify-content-center align-items-center"}>
+                <div className="digital-watch mb-3 text-center">
                     <svg width="0" height="0" viewBox="0 0 0 0">
                         <defs>
                             <g id="unit-h">
@@ -364,24 +358,24 @@ export const Example = () => {
                         </svg>
                     </div>
                 </div>
-                <button className={"randomTime"} id={"randomTime"} onClick={() => randomTime()}>Thời gian ngẫu nhiên</button>
-                <div className={"checkboxTime"} id={"checkboxTime"}>
+                <button className={"randomTime mb-3"} id={"randomTime"} onClick={() => randomTime()}>Thời gian ngẫu nhiên</button>
+                <div className={"checkboxTime d-flex justify-content-center"} id={"checkboxTime"}>
                 <label className="switch">
                     <input type={"checkbox"} id="buttonControl" className={"true"} onClick={() => setTimeNow(1 - timeNow)}/>
                     <span className="slider"/>
                 </label>
-                <p id="TextTimeNow" className={"TimeNow"}>Thời gian thực</p>
+                    <div id="TextTimeNow" className={"TimeNow ms-2"}>Thời gian thực</div>
                 </div>
             </Col>
-            <Col className={"clock"}>
-                <canvas id="canvasClockExampleChapter1" className={"canvasClock"}/>
+            <Col md='6' xs='6' className={"clock h-100"}>
+                <canvas id="canvasClockExampleChapter1" className={"canvasClock w-100 h-100"}/>
             </Col>
-            <Col className={"knob"} id={"knob"}>
+            <Col md='3' xs='3' className={"knob d-flex justify-content-center align-items-center"} id={"knob"}>
                 <div id={"divKnob"}>
-                <p className={"controlText"}>Điều khiển </p>
-                <button className={"buttonTime button1"} id={"button1"} onClick={() => changeControl("1","Hours")}>Kim giờ</button>
-                <button className={"buttonTime button2"} id={"button2"} onClick={() => changeControl("2","Minutes")}>Kim phút</button>
-                <button className={"buttonTime button3"} id={"button3"} onClick={() => changeControl("3","Seconds")}>Kim giây</button>
+                    <p className={"controlText fw-bold"}>Điều khiển </p>
+                    <button className={"buttonTime button1"} id={"button1"} onClick={() => changeControl("1","Hours")}>Kim giờ</button>
+                    <button className={"buttonTime button2"} id={"button2"} onClick={() => changeControl("2","Minutes")}>Kim phút</button>
+                    <button className={"buttonTime button3"} id={"button3"} onClick={() => changeControl("3","Seconds")}>Kim giây</button>
                 </div>
                 <p id={"check"} className={"null"}/>
             </Col>

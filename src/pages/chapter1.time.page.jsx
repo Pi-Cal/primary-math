@@ -35,9 +35,9 @@ export const Chapter1 = ({ show }) => {
   });
 
   const partNameStyle = useTransition(open, {
-    from: { opacity: 0, scale: 2 },
-    enter: { opacity: 1, scale: 1, delay: 500 },
-    leave: { opacity: 0, scale: 2 },
+    from: { opacity: 0, scale: 2, display: 'none' },
+    enter: { opacity: 1, scale: 1, delay: 500, display:'block' },
+    leave: { opacity: 0, scale: 2, display:'none' },
   })
 
   const transApi = useSpringRef();

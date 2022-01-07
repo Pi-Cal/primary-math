@@ -74,15 +74,15 @@ export const Exercise = () => {
                             striped variant="dark" animated
                             now={(currentQuiz+1)*100/questions.length} 
                         />
-                        <Row className='h-10'>
-                            <Col md='6' className='d-flex justify-content-start align-items-center'>
+                        <Row className='h-10' md='2' xs='2'>
+                            <Col className='d-flex justify-content-start align-items-center'>
                                 {
                                     <Button variant='outline-secondary' onClick={handlePrev} className='rounded-pill'>
                                         Quay lại
                                     </Button>
                                 }
                             </Col>
-                            <Col md='6' className='d-flex justify-content-end align-items-center'>
+                            <Col className='d-flex justify-content-end align-items-center'>
                                 { 
                                 <Button variant='outline-success' onClick={handleNext} className='rounded-pill'>
                                     {currentQuiz < questions.length - 1 ? 'Tiếp theo' : 'Hoàn thành'}

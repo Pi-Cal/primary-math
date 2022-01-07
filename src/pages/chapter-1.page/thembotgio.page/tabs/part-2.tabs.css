@@ -3,10 +3,10 @@
 }
 
 .h-90 {
-    min-height: 90%;
+    height: 90%;
 }
 .h-10 {
-    min-height: 10%;
+    height: 10%;
 }
 .clock-bg-img {
     width: 100%;
