@@ -8,8 +8,6 @@ export const Clock = (props) => {
 
   const {time, timeInterval, idAddTime, canvasName='clock-canvas', scale = 1, clockLabel='', } = props
 
-  const oldTime = useState({...time});
-
   useEffect(() => {
     let scene = new THREE.Scene();
     let clockCanvas = document.getElementById(canvasName);
@@ -39,7 +37,7 @@ export const Clock = (props) => {
 
     let loader = new GLTFLoader();
 
-    let figHour, figMinute, figSecond, timeIntervalToSecond = timeInterval.hour * 3600 + timeInterval.minute * 60 + timeInterval.second, changeSecond = timeIntervalToSecond / 100
+    let figHour, figMinute, figSecond, timeIntervalToSecond = timeInterval.hour * 3600 + timeInterval.minute * 60 + timeInterval.second, changeSecond = timeIntervalToSecond / 200
     loader.load("/models/clocks/Clock2.glb", (glb) => {
       const loadObject = async () => {
         await glb.scene.traverse((child) => {
@@ -67,20 +65,44 @@ export const Clock = (props) => {
       loadObject();
     });
 
-    console.log(changeSecond)
+    if (changeSecond === 0) changeSecond = 1
 
     function changeTime(){
+      if (changeSecond ===0) return
       if (changeSecond > timeIntervalToSecond) changeSecond = timeIntervalToSecond
       timeIntervalToSecond -= changeSecond
-      time.second += changeSecond
-      time.minute += Math.trunc(time.second/60)
-      time.hour += Math.trunc(time.minute/60)
+      if (idAddTime === true){
+        time.second += changeSecond
+        time.minute += Math.trunc(time.second/60)
+        time.hour += Math.trunc(time.minute/60)
 
-      time.second = time.second % 60
-      time.minute = time.minute % 60
-      time.hour = time.hour % 12
+        time.second = time.second % 60
+        time.minute = time.minute % 60
+        time.hour = time.hour % 12
+      } else {
+        time.second -= changeSecond
+        if (time.second < 0){
+          let t = (Math.trunc((time.second * -1)/60) + 1)
+          if ((time.second*-1) % 60 === 0) t--
+          time.minute -= t
+          time.second += t*60
+        }
+        if (time.minute < 0){
+          let t = (Math.trunc((time.minute * -1)/60) + 1)
+          if ((time.minute*-1) % 60 === 0) t--
+          time.hour -= t
+          time.minute += t*60
+        }
+        if (time.hour < 0) {
+          time.hour += 24
+        }
 
-      if (time.second === 60) time.second = 0
+        time.second = time.second % 60
+        time.minute = time.minute % 60
+        time.hour = time.hour % 12
+        console.log(time.hour,' ',time.minute,' ',time.second)
+      }
+
       setTimeout(changeTime, 50)
     }
     changeTime()
