@@ -51,11 +51,11 @@ export const Home2School = ({frame = 2}) => {
     }, []);
 
     return(
-        <Row className='bg-danger h-75'>
+        <div className='h-100'>
         {
             //TODO -- Quoc -- Part 2
         }
-            <canvas id="canvasExampleChapter1Part2" className='w-100 h-75'/>
-        </Row>
+            <canvas id="canvasExampleChapter1Part2" className='w-100 h-100'/>
+        </div>
     )
 }

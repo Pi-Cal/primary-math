@@ -79,7 +79,7 @@ export const Clock = (props) => {
   }, []);
 
   return (
-    <Container className="h-100 bg-success">
+    <Container className="h-100">
       <Row className="text-white clock-name fs-5 fw-bold text-center d-flex justify-content-center mb-2">
         {clockLabel}
       </Row>
