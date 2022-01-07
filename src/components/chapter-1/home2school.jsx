@@ -4,7 +4,10 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-export const Home2School = ({frame = 2}) => {
+export const Home2School = (props) => {
+
+    const {isAddTime} = props
+
     useEffect(() => {
         let scene = new THREE.Scene();
         let canvasExampleChapter1 = document.getElementById("canvasExampleChapter1Part2");
@@ -41,6 +44,8 @@ export const Home2School = ({frame = 2}) => {
         });
 
         new OrbitControls(camera, renderer.domElement);
+
+
 
         const animate = () => {
             requestAnimationFrame(animate);

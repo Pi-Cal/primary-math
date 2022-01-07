@@ -6,14 +6,9 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export const Clock = (props) => {
 
-    const {time, timeInterval, idAddTime, canvasName='clock-canvas', scale = 1, clockLabel='', } = props
+  const {time, timeInterval, idAddTime, canvasName='clock-canvas', scale = 1, clockLabel='', } = props
 
-    const oldTime = useState({...time});
-
-    useEffect(()=>{
-        //TODO Cho dong ho quay tu vi tri cu den vi tri moi
-    },[time])
-
+  const oldTime = useState({...time});
 
   useEffect(() => {
     let scene = new THREE.Scene();
@@ -33,10 +28,10 @@ export const Clock = (props) => {
     scene.add(light);
 
     let camera = new THREE.PerspectiveCamera(
-      50,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
+        50,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
     );
     camera.position.y = 3;
 
@@ -44,22 +39,25 @@ export const Clock = (props) => {
 
     let loader = new GLTFLoader();
 
-
+    let figHour, figMinute, figSecond, timeIntervalToSecond = timeInterval.hour * 3600 + timeInterval.minute * 60 + timeInterval.second, changeSecond = timeIntervalToSecond / 100
     loader.load("/models/clocks/Clock2.glb", (glb) => {
       const loadObject = async () => {
         await glb.scene.traverse((child) => {
-          if (child.name == "Hours") {
+          if (child.name === "Hours") {
+            figHour = {...child}
             child.rotation.y =
-            ((time.hour * Math.PI) / 6 +
-              (time.minute * Math.PI) / (6 * 60) +
-              (time.second * Math.PI) / (360 * 60)) *
-            -1;
+                ((time.hour * Math.PI) / 6 +
+                    (time.minute * Math.PI) / (6 * 60) +
+                    (time.second * Math.PI) / (360 * 60)) *
+                -1;
           }
-          if (child.name == "Minutes") {
+          if (child.name === "Minutes") {
+            figMinute = {...child}
             child.rotation.y =
-              ((time.minute * Math.PI) / 30 + (time.second * Math.PI) / (30 * 60)) * -1;
+                ((time.minute * Math.PI) / 30 + (time.second * Math.PI) / (30 * 60)) * -1;
           }
-          if (child.name == "Seconds") {
+          if (child.name === "Seconds") {
+            figSecond = {...child}
             child.rotation.y = ((time.second * Math.PI) / 30) * -1;
           }
         });
@@ -69,8 +67,34 @@ export const Clock = (props) => {
       loadObject();
     });
 
+    console.log(changeSecond)
+
+    function changeTime(){
+      if (changeSecond > timeIntervalToSecond) changeSecond = timeIntervalToSecond
+      timeIntervalToSecond -= changeSecond
+      time.second += changeSecond
+      time.minute += Math.trunc(time.second/60)
+      time.hour += Math.trunc(time.minute/60)
+
+      time.second = time.second % 60
+      time.minute = time.minute % 60
+      time.hour = time.hour % 12
+
+      if (time.second === 60) time.second = 0
+      setTimeout(changeTime, 50)
+    }
+    changeTime()
+
     var animate = () => {
       requestAnimationFrame(animate);
+      figSecond.rotation.y = ((time.second * Math.PI) / 30) * -1;
+      figMinute.rotation.y =
+          ((time.minute * Math.PI) / 30 + (time.second * Math.PI) / (30 * 60)) * -1;
+      figHour.rotation.y =
+          ((time.hour * Math.PI) / 6 +
+              (time.minute * Math.PI) / (6 * 60) +
+              (time.second * Math.PI) / (360 * 60)) *
+          -1;
       if (camera) {
         renderer.render(scene, camera);
       }
@@ -78,16 +102,16 @@ export const Clock = (props) => {
   }, []);
 
   return (
-    <Container className="h-100">
-      <Row className="text-white clock-name fs-5 fw-bold text-center d-flex justify-content-center mb-2">
-        {clockLabel}
-      </Row>
-      <Row className="d-flex justify-content-center align-items-center overflow-hidden mb-3">
-        {
-          //TODO Them mo hinh 3D tuong ung question
-          <canvas id={canvasName} className='w-100 h-100'></canvas>
-        }
-    </Row>
-    </Container>
+      <Container className="h-100">
+        <Row className="text-white clock-name fs-5 fw-bold text-center d-flex justify-content-center mb-2">
+          {clockLabel}
+        </Row>
+        <Row className="d-flex justify-content-center align-items-center overflow-hidden mb-3">
+          {
+            //TODO Them mo hinh 3D tuong ung question
+            <canvas id={canvasName} className='w-100 h-100'></canvas>
+          }
+        </Row>
+      </Container>
   );
 }

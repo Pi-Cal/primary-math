@@ -20,21 +20,21 @@ export const Example = () => {
                 <Col md='9' className='h-100'>
                     <Row className='h-25' md='2' xs='2'>
                         <Col>
-                            <Clock time={startTime} canvasName='startClock-example' scale={0.4} clockLabel='Giờ bắt đầu'/>
+                            <Clock time={{hour: 11, minute: 10, second: 0}} timeInterval = {{hour: 12, minute: 30, second: 5}} canvasName='startClock-example' scale={0.4} clockLabel='Giờ bắt đầu'/>
                         </Col>
                         <Col>
-                            <Clock time={endTime} canvasName='endClock-example' scale={0.4} clockLabel='Giờ kết thúc'/>
+                            <Clock time={endTime} timeInterval = {{hour: 1, minute: 0, second: 0}} canvasName='endClock-example' scale={0.4} clockLabel='Giờ kết thúc'/>
                         </Col>
                     </Row>
                     <Row className='h-75'>
-                        <Home2School/>
+                        <Home2School isAddTime={true}/>
                     </Row>
                 </Col>
                 <Col md='3' className='bg-light'>
                     <ExampleFormControl/>
                 </Col>
             </Row>
-            
+
         </Container>
     )
 }
