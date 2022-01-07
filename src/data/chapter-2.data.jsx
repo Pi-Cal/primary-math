@@ -73,10 +73,9 @@ export const FakeData = [
         id: 6,
         type: 'multiple-choice',
         scene: {
-          object: 'light',
-          totalObj: 5,
-          space: '1m',
-          totalSpace: '4m'
+          object: 'bulb',
+          widthObj: 3,
+          heightObj: 4,
         },
         problem: 'Người ta lắp đèn xung quanh một sân chơi hình chữ nhật 3m x 4m. Hỏi để lắp được xung quanh sân thì cần bao nhiêu đèn, biết mỗi đèn cách nhau 1m và 4 góc sân đều có đèn',
         choices: ['14', '18', '10', '16'],
