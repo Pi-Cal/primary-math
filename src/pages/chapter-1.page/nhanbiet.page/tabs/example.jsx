@@ -238,9 +238,9 @@ export const Example = () => {
             newHour = Math.trunc(newHour)
             newSecond = Math.round(newSecond)
             newMinute = Math.round(newMinute)
-            // if (newSecond === 60) newSecond = 0
-            // if (newMinute === 60) newMinute = 0
-            // if (newHour === 12) newHour = 0
+            if (newSecond === 60) newSecond = 0
+            if (newMinute === 60) newMinute = 0
+            if (newHour === 12) newHour = 0
             renderTime(newHour, newMinute, newSecond)
         })
 
