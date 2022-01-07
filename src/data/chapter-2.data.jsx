@@ -261,6 +261,9 @@ export const FakeData = [
           object: 'tree',
           widthObj: 5,
           heightObj: 5,
+          width: "4m",
+          height: "4m",
+          space: "1m"
         },
         problem: 'Một cái hồ hình vuông cạnh 4m. Người ta trồng cây dọc theo bờ hồ, mỗi cây cách nhau 1m. Hỏi người ta sẽ trồng hết bao nhiêu cây.',
         choices: ['15', '14', '16', '18'],
@@ -273,6 +276,9 @@ export const FakeData = [
           object: 'bulb',
           widthObj: 6,
           heightObj: 6,
+          width: "10m",
+          height: "10m",
+          space: "2m"
         },
         problem: 'Một sân bóng vuông cạnh 10m. Hỏi để lắp đèn xung quanh sân thì cần bao nhiêu tiền, biết mỗi đèn cách nhau 2m và giá tiền mỗi đèn là 100000đ.',
         choices: ['1000000đ', '1200000đ', '2000000đ', '2200000đ'],
@@ -285,6 +291,9 @@ export const FakeData = [
           object: 'house',
           widthObj: 4,
           heightObj: 5,
+          width: "30m",
+          height: "40m",
+          space: "?m",
         },
         problem: 'Một khu nhà hình chữ nhật có một khu vui chơi ở chính giữa. Khu vui chơi có kích thước 30m x 40m. Người ta tính được sẽ xây 14 ngôi nhà xung quanh khu vui chơi này.Hỏi mỗi ngôi nhà phải cách đều nhau bao nhiêu m?',
         answer: '10m'
@@ -296,6 +305,9 @@ export const FakeData = [
           object: 'match',
           widthObj: 3,
           heightObj: 4,
+          width: "?cm",
+          height: "?cm",
+          space: "3cm"
         },
         problem: 'Người ta xếp que diêm theo một hình chữ nhật, mỗi que diêm cách nhau 3cm. Hỏi chu vi hình chữ nhật là bao nhiêu biết người ta xếp được tất cả 10 que diêm.',
         choices: ['24cm', '27cm', '30cm', '33cm'],
