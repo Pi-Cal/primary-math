@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/primary-math/static/css/main.8a64a7e6.css",
+    "main.js": "/primary-math/static/js/main.789fe1ae.js",
+    "static/js/787.c5126c45.chunk.js": "/primary-math/static/js/787.c5126c45.chunk.js",
+    "static/media/img.jpg": "/primary-math/static/media/img.09fe4307c655ef6fbd7f.jpg",
+    "static/media/DS-DIGI.TTF": "/primary-math/static/media/DS-DIGI.0ef0e2249326c34137c8.TTF",
+    "index.html": "/primary-math/index.html",
+    "main.8a64a7e6.css.map": "/primary-math/static/css/main.8a64a7e6.css.map",
+    "main.789fe1ae.js.map": "/primary-math/static/js/main.789fe1ae.js.map",
+    "787.c5126c45.chunk.js.map": "/primary-math/static/js/787.c5126c45.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8a64a7e6.css",
+    "static/js/main.789fe1ae.js"
+  ]
+}
