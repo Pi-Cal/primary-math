@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, {useEffect} from 'react';
+import { Container, Row} from 'react-bootstrap';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -100,7 +100,6 @@ export const Clock = (props) => {
         time.second = time.second % 60
         time.minute = time.minute % 60
         time.hour = time.hour % 12
-        console.log(time.hour,' ',time.minute,' ',time.second)
       }
 
       setTimeout(changeTime, 50)
@@ -131,7 +130,7 @@ export const Clock = (props) => {
         <Row className="d-flex justify-content-center align-items-center overflow-hidden mb-3">
           {
             //TODO Them mo hinh 3D tuong ung question
-            <canvas id={canvasName} className='w-100 h-100'></canvas>
+            <canvas id={canvasName} className='w-100 h-100'/>
           }
         </Row>
       </Container>
