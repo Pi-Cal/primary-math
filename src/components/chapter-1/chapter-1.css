@@ -1,3 +1,9 @@
+
+@font-face {
+    font-family: 'Digital'; /*a name to be used later*/
+    src: url('/public/font/DS-DIGI.TTF'); /*URL to font*/
+}
+
 #clock-canvas {
     height: 500px;
     width: 500px;
@@ -60,3 +66,14 @@
 .fig-group {
     max-width: 40vw;
 }
+
+.clock-label {
+    font-size: 18px;
+    font-family: monospace;
+}
+
+.clock-digital {
+    font-family: 'Digital';
+}
+
+

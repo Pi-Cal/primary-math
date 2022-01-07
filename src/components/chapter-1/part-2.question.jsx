@@ -58,7 +58,7 @@ export const Question = ({question, startTime, endTime}) => {
                 })()
             }
             </Row>
-            <Row className='position-absolute submit-btn ps-4 pe-4'>
+            <Row className='position-absolute submit-btn ps-4 pe-4 w-100'>
                 <Button onClick={handleSubmit} className='rounded-pill'>Kiểm tra đáp án</Button>
             </Row>
             <SuccessAnimation show={showSuccessAnimation} onHide={()=>setShowSuccessAnimation(false)}/>

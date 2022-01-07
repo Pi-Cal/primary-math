@@ -45,6 +45,7 @@ export const Home2School = ({reverse = false}) => {
             const clip = THREE.AnimationClip.findByName(clips, 'Armature|mixamo.com|Layer0.002');
             const action = mixer.clipAction(clip);
             action.setLoop(THREE.LoopPingPong, 1);
+            action.clampWhenFinished = true;
             action.timeScale = reverse ? -1 : 1;
             action.play();
 

@@ -1,12 +1,29 @@
 import React, {useEffect} from 'react';
-import { Container, Row} from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import './chapter-1.css'
 
 export const Clock = (props) => {
 
   const {time, timeInterval, isAddTime, canvasName='clock-canvas', scale = 1, clockLabel='', } = props
+
+  const getEndTime = (src, inter) => {
+    let des = 0;
+    if (isAddTime) {
+      des = (src.hour + inter.hour) * 3600 + (src.minute + inter.minute)*60;
+    }
+    else {
+      des = (src.hour - inter.hour) * 3600 + (src.minute - inter.minute)*60;
+    }
+    let hour = Math.round(des/3600);
+    if (hour < 0) hour += 24;
+    hour = hour % 24;
+    let minute = des < 0 ? 60 - Math.abs(des) % 3600 / 60 : Math.abs(des) % 3600 / 60;
+
+    return (`${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute}`)
+  }
 
   useEffect(() => {
     let scene = new THREE.Scene();
@@ -102,7 +119,7 @@ export const Clock = (props) => {
         time.hour = time.hour % 12
       }
 
-      setTimeout(changeTime, 50)
+      setTimeout(changeTime, 50 * 28 / 32)
     }
     changeTime()
 
@@ -124,8 +141,8 @@ export const Clock = (props) => {
 
   return (
       <Container className="h-100">
-        <Row className="text-white clock-name fs-5 fw-bold text-center d-flex justify-content-center mb-2">
-          {clockLabel}
+        <Row className="text-white clock-name fs-5 fw-bold text-center d-flex justify-content-center mt-1 clock-digital">
+          {`${clockLabel}: ${getEndTime(time, timeInterval)}`}
         </Row>
         <Row className="d-flex justify-content-center align-items-center overflow-hidden mb-3">
           {
