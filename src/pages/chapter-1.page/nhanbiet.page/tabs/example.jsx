@@ -180,7 +180,7 @@ export const Example = () => {
         //Models
         let clockModel;
         let loader = new GLTFLoader();
-        loader.load("/models/clocks/Clock2.glb", async (glb) => {
+        loader.load(process.env.PUBLIC_URL + "/models/clocks/Clock2.glb", async (glb) => {
             clockModel = glb.scene
             await glb.scene.traverse((child) => {
                 if (child.name === "Hours") {

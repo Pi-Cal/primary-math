@@ -9,7 +9,7 @@ export const Home = () => {
 
     return(
         <div className='home-container wrapper'>
-            <Image src='background/home-background.png' alt='' className='home-bg-img' />
+            <Image src={process.env.PUBLIC_URL +'/background/home-background.png'} alt='' className='home-bg-img' />
             <div className="chapters">
                 <Chapter1/>
                 <Chapter2/>

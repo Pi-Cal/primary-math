@@ -97,7 +97,7 @@ const Chapter4Scene = ({index, questionList}) => {
                     </mesh>
                     <group>
                         <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[0, yPos - 0.1, -1]}>
-                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font={process.env.PUBLIC_URL + '/AndikaNewBasic-B.ttf'}>
                                 {widthSz}
                             </Text>
                         </Billboard>
@@ -107,7 +107,7 @@ const Chapter4Scene = ({index, questionList}) => {
                     </group>
                     <group>
                         <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[-width, yPos - 0.1, height - 1]}>
-                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font={process.env.PUBLIC_URL +'/AndikaNewBasic-B.ttf'}>
                                 {heightSz}
                             </Text>
                         </Billboard>
@@ -118,13 +118,13 @@ const Chapter4Scene = ({index, questionList}) => {
                     {
                         width % 2 === 0?
                     <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[0, yPos - 0.1, 0]}>
-                        <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                        <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font={process.env.PUBLIC_URL +'/AndikaNewBasic-B.ttf'}>
                             {space}
                         </Text>
                     </Billboard>
                     :
                     <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[-1, yPos - 0.1, 0]}>
-                        <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                        <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font={process.env.PUBLIC_URL +'/AndikaNewBasic-B.ttf'}>
                             {space}
                         </Text>
                     </Billboard>

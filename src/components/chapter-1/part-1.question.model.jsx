@@ -45,7 +45,7 @@ export const QuestionModel = ({editable, time, setTime, scale, canvasName, clock
     let loader = new GLTFLoader();
 
 
-    loader.load("/models/clocks/Clock2.glb", (glb) => {
+    loader.load( process.env.PUBLIC_URL + "/models/clocks/Clock2.glb", (glb) => {
       const loadObject = async () => {
         await glb.scene.traverse((child) => {
           console.log(time);

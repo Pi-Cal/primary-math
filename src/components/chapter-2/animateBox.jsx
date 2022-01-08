@@ -81,7 +81,7 @@ export default function AnimateBox({totalObj, totalSpace, space, object, firstOb
                     <group key={index}>
                         {index === Math.floor(xSpace.length/2) &&
                         <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[x, ySpace + 0.3, 0]}>
-                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                            <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font={process.env.PUBLIC_URL +'/AndikaNewBasic-B.ttf'}>
                                 {space}
                             </Text>
                         </Billboard>
@@ -94,7 +94,7 @@ export default function AnimateBox({totalObj, totalSpace, space, object, firstOb
             }
             <group>
                 <Billboard follow={true} lockX={false} lockY={false} lockZ={false} position={[0, ySpace - 0.7, 0]}>
-                    <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font='/AndikaNewBasic-B.ttf'>
+                    <Text fontSize={0.5} outlineWidth={'5%'} outlineColor="#000000" outlineOpacity={1} font={process.env.PUBLIC_URL +'/AndikaNewBasic-B.ttf'}>
                         {totalSpace}
                     </Text>
                 </Billboard>

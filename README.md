@@ -1,11 +1,12 @@
 # primary-math
 
-mô hình 3D: public/models/
-framework : React-Bootstrap, React-Router-Dom, useState, useEffect, useNavigate
+Model 3D: public/models/
+Framework : React-Bootstrap, React-Router-Dom, React-Three-Fiber, Three-js
 
-
-template string js
-useState, useEffect
-
-clone / pull : npm install
-run: npm start
+# Hướng dẫn cài đặt
+**Bước 1:** Cài đặt nodejs 
+[Nodejs](https://nodejs.org/en/download/)
+**Bước 2:** Clone, tải về -> Mở terminal chạy lệnh **npm install**
+![Step 2](https://i.ibb.co/9t09K1x/step2.png)
+**Bước 3:** Chạy **npm start**
+![Step 3](https://i.ibb.co/sFcxhrx/step3.png)

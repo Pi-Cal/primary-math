@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Tree(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/object/tree.glb')
+  const { nodes, materials } = useGLTF(process.env.PUBLIC_URL +'/models/object/tree.glb')
   return (
     <group ref={group} {...props}>
       <group
@@ -37,4 +37,4 @@ export default function Tree(props) {
   )
 }
 
-useGLTF.preload('/models/object/tree.glb')
+useGLTF.preload(process.env.PUBLIC_URL +'/models/object/tree.glb')

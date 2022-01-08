@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, HashRouter } from 'react-router-dom';
 import { Home } from './pages/home.page';
 import { Chapter1 } from './pages/chapter1.time.page';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,17 +9,20 @@ import { Chapter1TimeCalculator } from './pages/chapter-1.page/thembotgio.page/t
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='chapter-1' element={<Chapter1/>}/>
-        <Route path='chapter-2'>
-          <Route path='part/:partId' element={<ChapterPart />} />
+        <Route>
+          <Route path='/' element={<Home/>}/>
+          <Route path='chapter-1' element={<Chapter1/>}/>
+          <Route path='chapter-2'>
+            <Route path='part/:partId' element={<ChapterPart />} />
+          </Route>
+          <Route path='chapter-1/nhanbiet' element={<Chapter1Recognitions/>}/>
+          <Route path='chapter-1/thembotgio' element={<Chapter1TimeCalculator/>}/>
         </Route>
-        <Route path='chapter-1/nhanbiet' element={<Chapter1Recognitions/>}/>
-        <Route path='chapter-1/thembotgio' element={<Chapter1TimeCalculator/>}/>
+        
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

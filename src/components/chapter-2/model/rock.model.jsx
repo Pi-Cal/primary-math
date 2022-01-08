@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Rock(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/object/rock.glb')
+  const { nodes, materials } = useGLTF(process.env.PUBLIC_URL +'/models/object/rock.glb')
   return (
     <group ref={group} {...props}>
       <mesh
@@ -23,4 +23,4 @@ export default function Rock(props) {
   )
 }
 
-useGLTF.preload('/models/object/rock.glb')
+useGLTF.preload(process.env.PUBLIC_URL +'/models/object/rock.glb')

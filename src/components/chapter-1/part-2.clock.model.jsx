@@ -18,6 +18,7 @@ export const Clock = (props) => {
       des = (src.hour - inter.hour) * 3600 + (src.minute - inter.minute)*60;
     }
     let hour = Math.round(des/3600);
+    if (hour == 0 && hour * 3600 != des && des < 0) hour -= 1;
     if (hour < 0) hour += 24;
     hour = hour % 24;
     let minute = des < 0 ? 60 - Math.abs(des) % 3600 / 60 : Math.abs(des) % 3600 / 60;
@@ -55,7 +56,7 @@ export const Clock = (props) => {
     let loader = new GLTFLoader();
 
     let figHour, figMinute, figSecond, timeIntervalToSecond = timeInterval.hour * 3600 + timeInterval.minute * 60 + timeInterval.second, changeSecond = timeIntervalToSecond / 200
-    loader.load("/models/clocks/Clock2.glb", (glb) => {
+    loader.load( process.env.PUBLIC_URL + "/models/clocks/Clock2.glb", (glb) => {
       const loadObject = async () => {
         await glb.scene.traverse((child) => {
           if (child.name === "Hours") {
@@ -119,7 +120,7 @@ export const Clock = (props) => {
         time.hour = time.hour % 12
       }
 
-      setTimeout(changeTime, 50 * 28 / 32)
+      setTimeout(changeTime, 50 * 24 / 32)
     }
     changeTime()
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Tab, Tabs } from 'react-bootstrap';
+import { Button, Container, Tab, Tabs } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const Layout = ({children}) => {
@@ -8,7 +8,7 @@ const Layout = ({children}) => {
         navigate("/");
     }
     return (
-        <>
+        <Container className='position-relative'>
             <Button className="home-btn rounded-pill" onClick={handleClick}>Về trang chủ</Button>
             <Tabs defaultActiveKey="example">
                 {children.map(child => (
@@ -17,7 +17,7 @@ const Layout = ({children}) => {
                     </Tab> 
                 ))}
             </Tabs>
-        </>
+        </Container>
     )
 }
 

@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Human(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/object/human.glb')
+  const { nodes, materials } = useGLTF(process.env.PUBLIC_URL +'/models/object/human.glb')
   return (
     <group ref={group} {...props} >
       <mesh
@@ -22,4 +22,4 @@ export default function Human(props) {
   )
 }
 
-useGLTF.preload('/models/object/human.glb')
+useGLTF.preload(process.env.PUBLIC_URL +'/models/object/human.glb')

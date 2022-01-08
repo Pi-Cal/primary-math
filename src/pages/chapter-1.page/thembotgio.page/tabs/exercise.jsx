@@ -137,7 +137,7 @@ export const Exercise = () => {
 const Start = ({setStart}) => {
     return(
         <div className='start-container'>
-            <Image src='/background/clock-background.png' alt='' className='clock-bg-img vh-80' />
+            <Image src={process.env.PUBLIC_URL + '/background/clock-background.png'} alt='' className='clock-bg-img vh-80' />
             <div className='btn-container position-absolute'>
                 <div className='practice-slogan mb-3'>Ready?</div>
                 <Button onClick={()=>setStart(true)} className='start-btn rounded-pill w-100' variant='success'>Bắt đầu</Button> 

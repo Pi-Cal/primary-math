@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Bulb(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/object/light.glb')
+  const { nodes, materials } = useGLTF(process.env.PUBLIC_URL + '/models/object/light.glb')
   return (
     <group ref={group} {...props}>
       <group rotation={[Math.PI / 2, 0, Math.PI]} scale={[0.1, 0.1, 0.1]} position={[...props.position]}>
@@ -28,4 +28,4 @@ export default function Bulb(props) {
   )
 }
 
-useGLTF.preload('/models/object/light.glb')
+useGLTF.preload(process.env.PUBLIC_URL + '/models/object/light.glb')

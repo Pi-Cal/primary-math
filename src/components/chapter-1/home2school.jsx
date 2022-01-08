@@ -35,7 +35,7 @@ export const Home2School = ({reverse = false}) => {
 
         let mixer
 
-        loader.load("/models/school/home2school.glb", (glb) => {
+        loader.load(process.env.PUBLIC_URL + "/models/school/home2school.glb", (glb) => {
             glb.scene.position.y = -16;
             glb.scene.rotation.y = - Math.PI / 2
             scene.add(glb.scene);

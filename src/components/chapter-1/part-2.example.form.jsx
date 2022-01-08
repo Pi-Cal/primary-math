@@ -138,7 +138,7 @@ export const ExampleFormControl = ({setTime, setIntervalTime, setMode}) => {
             </Row>
             <Row style={{color: 'red'}}>{errMes}</Row>
             <Row className='w-100'>
-                <Button variant='success' className='rounded-pill w-100' onClick={handleSubmit}>Test</Button>
+                <Button variant='success' className='rounded-pill w-100' onClick={handleSubmit}>Kiểm tra kết quả</Button>
             </Row>
             
         </Container>

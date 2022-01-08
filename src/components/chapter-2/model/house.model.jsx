@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/object/house_1.glb')
+  const { nodes, materials } = useGLTF(process.env.PUBLIC_URL + '/models/object/house_1.glb')
   return (
     <group ref={group} {...props}>
       <group position={[...props.position]} scale={[0.07, 0.11, 0.11]}>
@@ -53,4 +53,4 @@ export default function Model(props) {
   )
 }
 
-useGLTF.preload('/models/object/house_1.glb')
+useGLTF.preload(process.env.PUBLIC_URL +'/models/object/house_1.glb')

@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Match(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/models/object/diem.glb')
+  const { nodes, materials } = useGLTF(process.env.PUBLIC_URL +'/models/object/diem.glb')
   return (
     <group ref={group} {...props}>
       <group 
@@ -31,4 +31,4 @@ export default function Match(props) {
   )
 }
 
-useGLTF.preload('/models/object/diem.glb')
+useGLTF.preload(process.env.PUBLIC_URL +'/models/object/diem.glb')
